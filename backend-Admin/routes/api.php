@@ -24,4 +24,6 @@ Route::post('/usuario/insertar', [ControllerUsuarios::class, 'store']);
 Route::put('/usuario/editar/{id}', [ControllerUsuarios::class, 'update']);
 Route::delete('/usuario/eliminar/{id}', [ControllerUsuarios::class, 'destroy']);
 
-
+//Administrar Políticas
+Route::get('/politicas', [ControllerPoliticas::class, 'MostrarPoliticas']);
+Route::post('/politicas/crear', [ControllerPoliticas::class, 'crear']);
