@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\ControllerUsuarios;
+use App\Http\Controllers\ControllerLogin;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -27,3 +28,8 @@ Route::delete('/usuario/eliminar/{id}', [ControllerUsuarios::class, 'destroy']);
 //Administrar Políticas
 Route::get('/politicas', [ControllerPoliticas::class, 'MostrarPoliticas']);
 Route::post('/politicas/crear', [ControllerPoliticas::class, 'crear']);
+
+Route::post('/login', [ControllerLogin::class, 'val']);
+
+Route::get('/login', [ControllerLogin::class, 'login'])->name('mostrar.login');
+
