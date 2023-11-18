@@ -1200,6 +1200,58 @@
             "install-path": "../hamcrest/hamcrest-php"
         },
         {
+            "name": "laravel-foundation/console",
+            "version": "v5.7.11",
+            "version_normalized": "5.7.11.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/laravel-foundation/console.git",
+                "reference": "105db5451be286ff6e9c6a9a517b8de15235ff24"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/laravel-foundation/console/zipball/105db5451be286ff6e9c6a9a517b8de15235ff24",
+                "reference": "105db5451be286ff6e9c6a9a517b8de15235ff24",
+                "shasum": ""
+            },
+            "time": "2018-10-26T18:16:05+00:00",
+            "type": "library",
+            "installation-source": "dist",
+            "autoload": {
+                "psr-4": {
+                    "Illuminate\\Foundation\\Console\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Ashley Clarke",
+                    "email": "me@ashleyclarke.me"
+                },
+                {
+                    "name": "Taylor Otwell",
+                    "email": "taylor@laravel.com"
+                }
+            ],
+            "description": "The Console component from Laravel Foundation.",
+            "keywords": [
+                "console",
+                "foundation",
+                "framework",
+                "illuminate",
+                "laravel"
+            ],
+            "support": {
+                "issues": "https://github.com/laravel-foundation/console/issues",
+                "source": "https://github.com/laravel-foundation/console/tree/v5.7.11"
+            },
+            "abandoned": true,
+            "install-path": "../laravel-foundation/console"
+        },
+        {
             "name": "laravel/framework",
             "version": "v10.32.1",
             "version_normalized": "10.32.1.0",

@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "9c491b8531eec05ba41a11d9276a5749",
+    "content-hash": "580dc1619da00d679fd8d50c661af1b1",
     "packages": [
         {
             "name": "brick/math",
@@ -969,6 +969,55 @@
                 }
             ],
             "time": "2023-08-27T10:19:19+00:00"
+        },
+        {
+            "name": "laravel-foundation/console",
+            "version": "v5.7.11",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/laravel-foundation/console.git",
+                "reference": "105db5451be286ff6e9c6a9a517b8de15235ff24"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/laravel-foundation/console/zipball/105db5451be286ff6e9c6a9a517b8de15235ff24",
+                "reference": "105db5451be286ff6e9c6a9a517b8de15235ff24",
+                "shasum": ""
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Illuminate\\Foundation\\Console\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Ashley Clarke",
+                    "email": "me@ashleyclarke.me"
+                },
+                {
+                    "name": "Taylor Otwell",
+                    "email": "taylor@laravel.com"
+                }
+            ],
+            "description": "The Console component from Laravel Foundation.",
+            "keywords": [
+                "console",
+                "foundation",
+                "framework",
+                "illuminate",
+                "laravel"
+            ],
+            "support": {
+                "issues": "https://github.com/laravel-foundation/console/issues",
+                "source": "https://github.com/laravel-foundation/console/tree/v5.7.11"
+            },
+            "abandoned": true,
+            "time": "2018-10-26T18:16:05+00:00"
         },
         {
             "name": "laravel/framework",
