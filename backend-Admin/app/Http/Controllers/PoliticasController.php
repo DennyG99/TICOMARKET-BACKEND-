@@ -8,7 +8,8 @@ class PoliticasController extends Controller
 {
     
     public function MostrarPoliticas(){
-        return response()->json(Politicas::all(),200);
+        $politicas = Politicas::orderBy('idPolitica', 'asc')->paginate(3);
+        return $politicas->items(); 
     }
 
     /**

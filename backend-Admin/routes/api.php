@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\PoliticasController;
 use App\Http\Controllers\ControllerUsuarios;
 use App\Http\Controllers\ControllerLogin;
 use Illuminate\Http\Request;
@@ -26,8 +27,8 @@ Route::put('/usuario/editar/{id}', [ControllerUsuarios::class, 'update']);
 Route::delete('/usuario/eliminar/{id}', [ControllerUsuarios::class, 'destroy']);
 
 //Administrar Políticas
-Route::get('/politicas', [ControllerPoliticas::class, 'MostrarPoliticas']);
-Route::post('/politicas/crear', [ControllerPoliticas::class, 'crear']);
+Route::get('/politicas', [PoliticasController::class, 'MostrarPoliticas']);
+Route::post('/politicas/crear', [PoliticasController::class, 'crear']);
 
 Route::post('/login', [ControllerLogin::class, 'val']);
 
