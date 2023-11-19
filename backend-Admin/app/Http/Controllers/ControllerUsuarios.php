@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Usuario;
 use Illuminate\Http\Request;
 
+
 class ControllerUsuarios extends Controller
 {
     /**
@@ -99,5 +100,15 @@ class ControllerUsuarios extends Controller
 
     public function getUsuario(){
         return response()->json(Usuario::all(),200);
+    }
+    
+    //FUNCIÓN PARA OBTENER EL ESTADO DE LOS USUARIOS ->SOLO ACCEDE ADMIN
+    public function estadoUsuarios()
+    {
+        $estadoUsuarios = Usuario::join('estados', 'usuarios.idEstado', '=', 'estados.id')
+            ->select('usuarios.nombre as Nombre_Usuario', 'estados.nombre as Estado')
+            ->get();
+
+        return response()->json($estadoUsuarios);
     }
 }

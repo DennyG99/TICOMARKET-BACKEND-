@@ -4,9 +4,9 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Usuario extends Model
+class Tienda extends Model
 {
-    protected $primaryKey = "id";
-    protected $table  = "Usuarios";
+    protected $table = 'Tiendas';
+    protected $primaryKey = 'id_tienda';
     public $timestamps = false;
 }
