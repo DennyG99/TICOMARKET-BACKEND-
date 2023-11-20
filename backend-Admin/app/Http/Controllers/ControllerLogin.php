@@ -1,14 +1,12 @@
 <?php
 
-
 namespace App\Http\Controllers;
 
+use App\Mail\ControllerMail;
 use App\Models\Usuario;
 use Illuminate\Http\Request;
-use App\Mail\validacionUsuarioAdmin;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Mail;
-
 
 class ControllerLogin extends Controller
 {
@@ -21,19 +19,21 @@ class ControllerLogin extends Controller
     public function val(){
 
         //estos datos serán tomados de la BD más adelante
-        $emBD = "correo@gmail.com";
+        $emBD = "stantf99@gmail.com";
         $passBD = "1";
 
        //obtiene el correo electronico ingresado
-       $em = request('email');
+       $emailUserAdmin = request('email');
        //obtiene la contraseña ingresada
-       $pass = request('password');
+       $passwordUserAdmin = request('password');
+        $dato = "123";
+        $_SESSION['dato'] = $dato;
 
        //verifica que el usuario ingresado exista en la BD
-       if($em == $emBD && $passBD == $pass){
+       if($emailUserAdmin == $emBD && $passBD == $passwordUserAdmin){
 
-        //envia el email de prueba al correo ingresado
-        Mail::to($em)->send(new validacionUsuarioAdmin);
+        //envia el email de prueba al correo ingresado junto con el asun-to y la vista del mismo
+        Mail::to($emailUserAdmin)->send(new ControllerMail('Verificación de Administrador', 'Mail.validacionUsuarioAdmin'));
 
         return "correo enviado con éxito";
        }else{
