@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 use App\Models\Politicas;
 use Illuminate\Http\Request;
 
-class PoliticasController extends Controller
+class ControllerPoliticas extends Controller
 {
     
     public function MostrarPoliticas(){
@@ -28,27 +28,27 @@ class PoliticasController extends Controller
         return response()->json($politicas,200);
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(string $id)
-    {
-        //
-    }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function editar(Request $request, string $idPolitica)
     {
-        //
-    }
+        $politicas = Politicas::find($idPolitica);
+        $politicas->nombre = $request->input('nombre');
+        $politicas->descripcion = $request->input('descripcion');
+        $politicas->idEstado = $request->input('idEstado');
+        $politicas->save();
 
+    }
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function eliminar(string $idPolitica)
     {
-        //
+        $politicas = Politicas::find($idPolitica);
+        $politicas->delete();
+        return response()->json($politicas,200);
+        
     }
 }

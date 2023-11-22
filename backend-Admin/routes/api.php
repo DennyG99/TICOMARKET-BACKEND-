@@ -1,6 +1,6 @@
 <?php
 
-use App\Http\Controllers\PoliticasController;
+use App\Http\Controllers\ControllerPoliticas;
 use App\Http\Controllers\ControllerUsuarios;
 use App\Http\Controllers\ControllerLogin;
 use App\Http\Controllers\ControllerProductos;
@@ -35,9 +35,12 @@ Route::get('/admin/ingresos-por-anuncios', [ControllerOfertas::class, 'ingresosP
 Route::get('/admin/estado-usuarios', [ControllerUsuarios::class, 'estadoUsuarios']);
 Route::get('/admin/ventas-por-tienda', [ControllerVentas::class, 'ventasPorTienda']);
 Route::get('/admin/vendedores-cotizados', [ControllerVendedores::class, 'mostrarVendedoresCotizados']);
+
 //Administrar Políticas
-Route::get('/politicas', [PoliticasController::class, 'MostrarPoliticas']);
-Route::post('/politicas/crear', [PoliticasController::class, 'crear']);
+Route::get('/politicas', [ControllerPoliticas::class, 'MostrarPoliticas']);
+Route::post('/politicas/crear', [ControllerPoliticas::class, 'crear']);
+Route::put('/politicas/editar/{idPolitica}', [ControllerPoliticas::class, 'editar']);
+Route::delete('/usuario/eliminar/{idPolitica}', [ControllerPoliticas::class, 'eliminar']);
 
 Route::post('/login', [ControllerLogin::class, 'val']);
 
