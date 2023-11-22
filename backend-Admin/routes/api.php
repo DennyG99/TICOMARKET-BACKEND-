@@ -38,8 +38,13 @@ Route::get('/admin/vendedores-cotizados', [ControllerVendedores::class, 'mostrar
 //Administrar Políticas
 Route::get('/politicas', [PoliticasController::class, 'MostrarPoliticas']);
 Route::post('/politicas/crear', [PoliticasController::class, 'crear']);
+//login entre otros metodos de autenticacion
+Route::post('login', [ControllerLogin::class,'login']);
+Route::post('register', [ControllerLogin::class,'register']);
 
-Route::post('/login', [ControllerLogin::class, 'val']);
+Route::middleware('auth:sanctum')->group(function (){
+    Route::get('logout', [ControllerLogin::class,'logout']);
+    Route::get('user', [ControllerLogin::class,'getUser']);
+    Route::post('/verificacion', [ControllerLogin::class, 'verificacionAdmin']);
 
-Route::get('/login', [ControllerLogin::class, 'login'])->name('mostrar.login');
-
+});
