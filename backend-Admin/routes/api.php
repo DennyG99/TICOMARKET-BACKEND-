@@ -2,13 +2,10 @@
 
 use App\Http\Controllers\ControllerPoliticas;
 use App\Http\Controllers\ControllerUsuarios;
-<<<<<<< HEAD
-=======
 use App\Http\Controllers\ControllerLogin;
 use App\Http\Controllers\ControllerProductos;
 use App\Http\Controllers\ControllerOfertas;
 use App\Http\Controllers\ControllerVentas;
->>>>>>> 4a8e4d780d5f2aa04e3949d9a86ce46eb2e10f3b
 use App\Http\Controllers\ControllerVendedores;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -40,20 +37,11 @@ Route::get('/admin/ventas-por-tienda', [ControllerVentas::class, 'ventasPorTiend
 Route::get('/admin/vendedores-cotizados', [ControllerVendedores::class, 'mostrarVendedoresCotizados']);
 
 //Administrar Políticas
-<<<<<<< HEAD
-Route::get('/politicas', [PoliticasController::class, 'MostrarPoliticas']);
-Route::post('/politicas/crear', [PoliticasController::class, 'crear']);
-//login entre otros metodos de autenticacion
-Route::post('login', [ControllerLogin::class,'login']);
-Route::post('register', [ControllerLogin::class,'register']);
-=======
 Route::get('/politicas', [ControllerPoliticas::class, 'MostrarPoliticas']);
 Route::post('/politicas/crear', [ControllerPoliticas::class, 'crear']);
 Route::put('/politicas/editar/{idPolitica}', [ControllerPoliticas::class, 'editar']);
 Route::delete('/usuario/eliminar/{idPolitica}', [ControllerPoliticas::class, 'eliminar']);
->>>>>>> 57f3946b1fcf404acb1dd696886c510f3e8d7dd6
 
-<<<<<<< HEAD
 //Vendedor 
 Route::get('/vendedor/mostrar/{id}', [ControllerVendedores::class, 'index']);
 Route::get('/vendedor/editar/{id}', [ControllerVendedores::class, 'edit']);
@@ -65,11 +53,3 @@ Route::post('/vendedor/eliminar/{id}', [ControllerVendedores::class, 'eliminarVe
 
 
 
-=======
-Route::middleware('auth:sanctum')->group(function (){
-    Route::get('logout', [ControllerLogin::class,'logout']);
-    Route::get('user', [ControllerLogin::class,'getUser']);
-    Route::post('/verificacion', [ControllerLogin::class, 'verificacionAdmin']);
-
-});
->>>>>>> 4a8e4d780d5f2aa04e3949d9a86ce46eb2e10f3b
