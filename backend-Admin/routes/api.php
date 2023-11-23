@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\ControllerUsuarios;
+use App\Http\Controllers\ControllerVendedores;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -23,5 +24,16 @@ Route::get('/usuario', [ControllerUsuarios::class, 'getUsuario']);
 Route::post('/usuario/insertar', [ControllerUsuarios::class, 'store']);
 Route::put('/usuario/editar/{id}', [ControllerUsuarios::class, 'update']);
 Route::delete('/usuario/eliminar/{id}', [ControllerUsuarios::class, 'destroy']);
+
+
+//Vendedor 
+Route::get('/vendedor/mostrar/{id}', [ControllerVendedores::class, 'index']);
+Route::get('/vendedor/editar/{id}', [ControllerVendedores::class, 'edit']);
+Route::get('/vendedor/pdf/{id}', [ControllerVendedores::class, 'exportPDF']);
+Route::put('/vendedor/modificar/{id}', [ControllerVendedores::class, 'update']);
+Route::get('/vendedor/listar', [ControllerVendedores::class,'index']);
+Route::post('/vendedor/eliminar/{id}', [ControllerVendedores::class, 'eliminarVendedor']);
+
+
 
 
