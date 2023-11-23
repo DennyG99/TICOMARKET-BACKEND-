@@ -31,6 +31,7 @@ class ControllerVendedores extends Controller
 
     public function update(Request $request, $id)
     {
+        //mochis guapo
         $dataVendedores = Usuario::find($id);
         $dataVendedores->nombre = $request->nombre;
         $dataVendedores->apellidoUno = $request->apellidoUno;
