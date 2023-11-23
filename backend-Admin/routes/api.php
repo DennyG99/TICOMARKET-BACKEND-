@@ -62,3 +62,13 @@ Route::middleware('auth:sanctum')->group(function (){
     Route::post('/verificacion', [ControllerLogin::class, 'verificacionAdmin']);
 
 });
+
+
+//Estados
+Route::get('/estado', [ControllerEstados::class, 'index']);
+Route::post('/estado', [ControllerEstados::class, 'store']);
+Route::delete('/estado', [ControllerEstados::class, 'destroy']);
+Route::put('/estado', [ControllerEstados::class, 'update']);
+
+
+Route::post('/notificacion', [ControllerNotificaciones::class, 'val']);
