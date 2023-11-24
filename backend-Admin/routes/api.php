@@ -44,7 +44,7 @@ Route::get('/admin/vendedores-cotizados', [ControllerVendedores::class, 'mostrar
 Route::get('/politicas', [ControllerPoliticas::class, 'MostrarPoliticas']);
 Route::post('/politicas/crear', [ControllerPoliticas::class, 'crear']);
 Route::put('/politicas/editar/{idPolitica}', [ControllerPoliticas::class, 'editar']);
-Route::delete('/usuario/eliminar/{idPolitica}', [ControllerPoliticas::class, 'eliminar']);
+Route::delete('/politicas/eliminar/{idPolitica}', [ControllerPoliticas::class, 'eliminar']);
 
 //login entre otros metodos de autenticacion
 Route::post('login', [ControllerLogin::class,'login']);
@@ -77,5 +77,10 @@ Route::post('/planes/crear', [ControllerPlanes::class, 'store']);
 Route::put('/planes/editar/{idPlan}', [ControllerPlanes::class, 'update']);
 Route::delete('/planes/eliminar/{idPlan}', [ControllerPlanes::class, 'destroy']);
 
+//Administrar Roles
+Route::get('/roles', [ControllerRol::class, 'index']);
+Route::post('/roles/insertar', [ControllerRol::class, 'store']);
+Route::put('/roles/editar/{id}', [ControllerRol::class, 'update']);
+Route::delete('/roles/eliminar/{id}', [ControllerRol::class,'destroy']);
 
 Route::post('/notificacion', [ControllerNotificaciones::class, 'val']);

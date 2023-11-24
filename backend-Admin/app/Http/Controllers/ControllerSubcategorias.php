@@ -77,7 +77,7 @@ class ControllerSubcategorias extends Controller
      */
     public function destroy($id)
     {
-        $subcategoria =Subcategorias::where('idSubcategoria', $id)->where('idEstado', 1)->first();
+        $subcategoria = Subcategorias::where('idSubcategoria', $id)->where('idEstado', 1)->first();
 
         if (!$subcategoria) {
             return response()->json(['message' => 'Subcategoria no encontrada o esta inactiva'], 404);
