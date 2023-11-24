@@ -1200,6 +1200,199 @@
             "install-path": "../hamcrest/hamcrest-php"
         },
         {
+            "name": "jaybizzle/crawler-detect",
+            "version": "v1.2.116",
+            "version_normalized": "1.2.116.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/JayBizzle/Crawler-Detect.git",
+                "reference": "97e9fe30219e60092e107651abb379a38b342921"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/JayBizzle/Crawler-Detect/zipball/97e9fe30219e60092e107651abb379a38b342921",
+                "reference": "97e9fe30219e60092e107651abb379a38b342921",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.0"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "^4.8|^5.5|^6.5|^9.4"
+            },
+            "time": "2023-07-21T15:49:49+00:00",
+            "type": "library",
+            "installation-source": "dist",
+            "autoload": {
+                "psr-4": {
+                    "Jaybizzle\\CrawlerDetect\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Mark Beech",
+                    "email": "m@rkbee.ch",
+                    "role": "Developer"
+                }
+            ],
+            "description": "CrawlerDetect is a PHP class for detecting bots/crawlers/spiders via the user agent",
+            "homepage": "https://github.com/JayBizzle/Crawler-Detect/",
+            "keywords": [
+                "crawler",
+                "crawler detect",
+                "crawler detector",
+                "crawlerdetect",
+                "php crawler detect"
+            ],
+            "support": {
+                "issues": "https://github.com/JayBizzle/Crawler-Detect/issues",
+                "source": "https://github.com/JayBizzle/Crawler-Detect/tree/v1.2.116"
+            },
+            "install-path": "../jaybizzle/crawler-detect"
+        },
+        {
+            "name": "jenssegers/agent",
+            "version": "v2.6.4",
+            "version_normalized": "2.6.4.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/jenssegers/agent.git",
+                "reference": "daa11c43729510b3700bc34d414664966b03bffe"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/jenssegers/agent/zipball/daa11c43729510b3700bc34d414664966b03bffe",
+                "reference": "daa11c43729510b3700bc34d414664966b03bffe",
+                "shasum": ""
+            },
+            "require": {
+                "jaybizzle/crawler-detect": "^1.2",
+                "mobiledetect/mobiledetectlib": "^2.7.6",
+                "php": ">=5.6"
+            },
+            "require-dev": {
+                "php-coveralls/php-coveralls": "^2.1",
+                "phpunit/phpunit": "^5.0|^6.0|^7.0"
+            },
+            "suggest": {
+                "illuminate/support": "Required for laravel service providers"
+            },
+            "time": "2020-06-13T08:05:20+00:00",
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "3.0-dev"
+                },
+                "laravel": {
+                    "providers": [
+                        "Jenssegers\\Agent\\AgentServiceProvider"
+                    ],
+                    "aliases": {
+                        "Agent": "Jenssegers\\Agent\\Facades\\Agent"
+                    }
+                }
+            },
+            "installation-source": "dist",
+            "autoload": {
+                "psr-4": {
+                    "Jenssegers\\Agent\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Jens Segers",
+                    "homepage": "https://jenssegers.com"
+                }
+            ],
+            "description": "Desktop/mobile user agent parser with support for Laravel, based on Mobiledetect",
+            "homepage": "https://github.com/jenssegers/agent",
+            "keywords": [
+                "Agent",
+                "browser",
+                "desktop",
+                "laravel",
+                "mobile",
+                "platform",
+                "user agent",
+                "useragent"
+            ],
+            "support": {
+                "issues": "https://github.com/jenssegers/agent/issues",
+                "source": "https://github.com/jenssegers/agent/tree/v2.6.4"
+            },
+            "funding": [
+                {
+                    "url": "https://github.com/jenssegers",
+                    "type": "github"
+                },
+                {
+                    "url": "https://tidelift.com/funding/github/packagist/jenssegers/agent",
+                    "type": "tidelift"
+                }
+            ],
+            "install-path": "../jenssegers/agent"
+        },
+        {
+            "name": "laravel-foundation/console",
+            "version": "v5.7.11",
+            "version_normalized": "5.7.11.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/laravel-foundation/console.git",
+                "reference": "105db5451be286ff6e9c6a9a517b8de15235ff24"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/laravel-foundation/console/zipball/105db5451be286ff6e9c6a9a517b8de15235ff24",
+                "reference": "105db5451be286ff6e9c6a9a517b8de15235ff24",
+                "shasum": ""
+            },
+            "time": "2018-10-26T18:16:05+00:00",
+            "type": "library",
+            "installation-source": "dist",
+            "autoload": {
+                "psr-4": {
+                    "Illuminate\\Foundation\\Console\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Ashley Clarke",
+                    "email": "me@ashleyclarke.me"
+                },
+                {
+                    "name": "Taylor Otwell",
+                    "email": "taylor@laravel.com"
+                }
+            ],
+            "description": "The Console component from Laravel Foundation.",
+            "keywords": [
+                "console",
+                "foundation",
+                "framework",
+                "illuminate",
+                "laravel"
+            ],
+            "support": {
+                "issues": "https://github.com/laravel-foundation/console/issues",
+                "source": "https://github.com/laravel-foundation/console/tree/v5.7.11"
+            },
+            "abandoned": true,
+            "install-path": "../laravel-foundation/console"
+        },
+        {
             "name": "laravel/framework",
             "version": "v10.32.1",
             "version_normalized": "10.32.1.0",
@@ -2215,6 +2408,71 @@
             "install-path": "../league/mime-type-detection"
         },
         {
+            "name": "mobiledetect/mobiledetectlib",
+            "version": "2.8.45",
+            "version_normalized": "2.8.45.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/serbanghita/Mobile-Detect.git",
+                "reference": "96aaebcf4f50d3d2692ab81d2c5132e425bca266"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/serbanghita/Mobile-Detect/zipball/96aaebcf4f50d3d2692ab81d2c5132e425bca266",
+                "reference": "96aaebcf4f50d3d2692ab81d2c5132e425bca266",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.0.0"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "~4.8.36"
+            },
+            "time": "2023-11-07T21:57:25+00:00",
+            "type": "library",
+            "installation-source": "dist",
+            "autoload": {
+                "psr-0": {
+                    "Detection": "namespaced/"
+                },
+                "classmap": [
+                    "Mobile_Detect.php"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Serban Ghita",
+                    "email": "serbanghita@gmail.com",
+                    "homepage": "http://mobiledetect.net",
+                    "role": "Developer"
+                }
+            ],
+            "description": "Mobile_Detect is a lightweight PHP class for detecting mobile devices. It uses the User-Agent string combined with specific HTTP headers to detect the mobile environment.",
+            "homepage": "https://github.com/serbanghita/Mobile-Detect",
+            "keywords": [
+                "detect mobile devices",
+                "mobile",
+                "mobile detect",
+                "mobile detector",
+                "php mobile detect"
+            ],
+            "support": {
+                "issues": "https://github.com/serbanghita/Mobile-Detect/issues",
+                "source": "https://github.com/serbanghita/Mobile-Detect/tree/2.8.45"
+            },
+            "funding": [
+                {
+                    "url": "https://github.com/serbanghita",
+                    "type": "github"
+                }
+            ],
+            "install-path": "../mobiledetect/mobiledetectlib"
+        },
+        {
             "name": "mockery/mockery",
             "version": "1.6.6",
             "version_normalized": "1.6.6.0",
@@ -3175,17 +3433,17 @@
         },
         {
             "name": "phpunit/php-code-coverage",
-            "version": "10.1.8",
-            "version_normalized": "10.1.8.0",
+            "version": "10.1.7",
+            "version_normalized": "10.1.7.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sebastianbergmann/php-code-coverage.git",
-                "reference": "84838eed9ded511f61dc3e8b5944a52d9017b297"
+                "reference": "355324ca4980b8916c18b9db29f3ef484078f26e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sebastianbergmann/php-code-coverage/zipball/84838eed9ded511f61dc3e8b5944a52d9017b297",
-                "reference": "84838eed9ded511f61dc3e8b5944a52d9017b297",
+                "url": "https://api.github.com/repos/sebastianbergmann/php-code-coverage/zipball/355324ca4980b8916c18b9db29f3ef484078f26e",
+                "reference": "355324ca4980b8916c18b9db29f3ef484078f26e",
                 "shasum": ""
             },
             "require": {
@@ -3210,7 +3468,7 @@
                 "ext-pcov": "PHP extension that provides line coverage",
                 "ext-xdebug": "PHP extension that provides line coverage as well as branch and path coverage"
             },
-            "time": "2023-11-15T13:31:15+00:00",
+            "time": "2023-10-04T15:34:17+00:00",
             "type": "library",
             "extra": {
                 "branch-alias": {
@@ -3244,7 +3502,7 @@
             "support": {
                 "issues": "https://github.com/sebastianbergmann/php-code-coverage/issues",
                 "security": "https://github.com/sebastianbergmann/php-code-coverage/security/policy",
-                "source": "https://github.com/sebastianbergmann/php-code-coverage/tree/10.1.8"
+                "source": "https://github.com/sebastianbergmann/php-code-coverage/tree/10.1.7"
             },
             "funding": [
                 {
@@ -5808,8 +6066,8 @@
         },
         {
             "name": "symfony/deprecation-contracts",
-            "version": "v3.4.0",
-            "version_normalized": "3.4.0.0",
+            "version": "v3.3.0",
+            "version_normalized": "3.3.0.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/deprecation-contracts.git",
@@ -5858,7 +6116,7 @@
             "description": "A generic function and convention to trigger deprecation notices",
             "homepage": "https://symfony.com",
             "support": {
-                "source": "https://github.com/symfony/deprecation-contracts/tree/v3.4.0"
+                "source": "https://github.com/symfony/deprecation-contracts/tree/v3.3.0"
             },
             "funding": [
                 {
@@ -6038,8 +6296,8 @@
         },
         {
             "name": "symfony/event-dispatcher-contracts",
-            "version": "v3.4.0",
-            "version_normalized": "3.4.0.0",
+            "version": "v3.3.0",
+            "version_normalized": "3.3.0.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/event-dispatcher-contracts.git",
@@ -6097,7 +6355,7 @@
                 "standards"
             ],
             "support": {
-                "source": "https://github.com/symfony/event-dispatcher-contracts/tree/v3.4.0"
+                "source": "https://github.com/symfony/event-dispatcher-contracts/tree/v3.3.0"
             },
             "funding": [
                 {
@@ -7465,17 +7723,17 @@
         },
         {
             "name": "symfony/service-contracts",
-            "version": "v3.4.0",
-            "version_normalized": "3.4.0.0",
+            "version": "v3.3.0",
+            "version_normalized": "3.3.0.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/service-contracts.git",
-                "reference": "b3313c2dbffaf71c8de2934e2ea56ed2291a3838"
+                "reference": "40da9cc13ec349d9e4966ce18b5fbcd724ab10a4"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/service-contracts/zipball/b3313c2dbffaf71c8de2934e2ea56ed2291a3838",
-                "reference": "b3313c2dbffaf71c8de2934e2ea56ed2291a3838",
+                "url": "https://api.github.com/repos/symfony/service-contracts/zipball/40da9cc13ec349d9e4966ce18b5fbcd724ab10a4",
+                "reference": "40da9cc13ec349d9e4966ce18b5fbcd724ab10a4",
                 "shasum": ""
             },
             "require": {
@@ -7485,7 +7743,7 @@
             "conflict": {
                 "ext-psr": "<1.1|>=2"
             },
-            "time": "2023-07-30T20:28:31+00:00",
+            "time": "2023-05-23T14:45:45+00:00",
             "type": "library",
             "extra": {
                 "branch-alias": {
@@ -7530,7 +7788,7 @@
                 "standards"
             ],
             "support": {
-                "source": "https://github.com/symfony/service-contracts/tree/v3.4.0"
+                "source": "https://github.com/symfony/service-contracts/tree/v3.3.0"
             },
             "funding": [
                 {
@@ -7737,23 +7995,23 @@
         },
         {
             "name": "symfony/translation-contracts",
-            "version": "v3.4.0",
-            "version_normalized": "3.4.0.0",
+            "version": "v3.3.0",
+            "version_normalized": "3.3.0.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/translation-contracts.git",
-                "reference": "dee0c6e5b4c07ce851b462530088e64b255ac9c5"
+                "reference": "02c24deb352fb0d79db5486c0c79905a85e37e86"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/translation-contracts/zipball/dee0c6e5b4c07ce851b462530088e64b255ac9c5",
-                "reference": "dee0c6e5b4c07ce851b462530088e64b255ac9c5",
+                "url": "https://api.github.com/repos/symfony/translation-contracts/zipball/02c24deb352fb0d79db5486c0c79905a85e37e86",
+                "reference": "02c24deb352fb0d79db5486c0c79905a85e37e86",
                 "shasum": ""
             },
             "require": {
                 "php": ">=8.1"
             },
-            "time": "2023-07-25T15:08:44+00:00",
+            "time": "2023-05-30T17:17:10+00:00",
             "type": "library",
             "extra": {
                 "branch-alias": {
@@ -7798,7 +8056,7 @@
                 "standards"
             ],
             "support": {
-                "source": "https://github.com/symfony/translation-contracts/tree/v3.4.0"
+                "source": "https://github.com/symfony/translation-contracts/tree/v3.3.0"
             },
             "funding": [
                 {
