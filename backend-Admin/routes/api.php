@@ -47,7 +47,7 @@ Route::delete('/usuario/eliminar/{idPolitica}', [ControllerPoliticas::class, 'el
 //login entre otros metodos de autenticacion
 Route::post('login', [ControllerLogin::class,'login']);
 Route::post('register', [ControllerLogin::class,'register']);
-
+Route::post('test', [ControllerLogin::class,'test']);
 
 
 Route::middleware('auth:sanctum')->group(function (){
