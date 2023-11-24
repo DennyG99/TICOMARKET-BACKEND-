@@ -7,5 +7,9 @@ use Illuminate\Database\Eloquent\Model;
 
 class Planes extends Model
 {
-    use HasFactory;
+    protected $table= "planes";
+    protected $primaryKey='idPlan';
+    public $timestamps =false;
+
+    protected $fillable = ['nombre', 'descripcion', 'tipoPlan','precio','idEstado'];
 }

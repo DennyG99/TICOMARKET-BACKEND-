@@ -9,6 +9,8 @@ use App\Http\Controllers\ControllerVentas;
 use App\Http\Controllers\ControllerVendedores;
 use App\Http\Controllers\ControllerEstados;
 use App\Http\Controllers\ControllerNotificaciones;
+use App\Http\Controllers\ControllerPlanes;
+use App\Http\Controllers\ControllerSubcategorias;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -62,6 +64,18 @@ Route::get('/estado', [ControllerEstados::class, 'index']);
 Route::post('/estado', [ControllerEstados::class, 'store']);
 Route::delete('/estado', [ControllerEstados::class, 'destroy']);
 Route::put('/estado', [ControllerEstados::class, 'update']);
+
+//Subcategorias
+Route::get('/subcategorias', [ControllerSubcategorias::class, 'index']);
+Route::post('/subcategorias/crear', [ControllerSubcategorias::class, 'store']);
+Route::put('/subcategorias/editar/{idSubcategoria}', [ControllerSubcategorias::class, 'update']);
+Route::delete('/subcategorias/eliminar/{idSubcategoria}', [ControllerSubcategorias::class, 'destroy']);
+
+//Planes
+Route::get('/planes', [ControllerPlanes::class, 'index']);
+Route::post('/planes/crear', [ControllerPlanes::class, 'store']);
+Route::put('/planes/editar/{idPlan}', [ControllerPlanes::class, 'update']);
+Route::delete('/planes/eliminar/{idPlan}', [ControllerPlanes::class, 'destroy']);
 
 
 Route::post('/notificacion', [ControllerNotificaciones::class, 'val']);
