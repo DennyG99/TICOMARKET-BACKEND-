@@ -9,6 +9,11 @@ use App\Http\Controllers\ControllerVentas;
 use App\Http\Controllers\ControllerVendedores;
 use App\Http\Controllers\ControllerEstados;
 use App\Http\Controllers\ControllerNotificaciones;
+use App\Http\Controllers\ControllerPlanes;
+use App\Http\Controllers\ControllerSubcategorias;
+use App\Http\Controllers\ControllerCategorias;
+use App\Http\Controllers\ControllerReembolsos;
+use App\Http\Controllers\ControllerRol;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -42,7 +47,7 @@ Route::get('/admin/vendedores-cotizados', [ControllerVendedores::class, 'mostrar
 Route::get('/politicas', [ControllerPoliticas::class, 'MostrarPoliticas']);
 Route::post('/politicas/crear', [ControllerPoliticas::class, 'crear']);
 Route::put('/politicas/editar/{idPolitica}', [ControllerPoliticas::class, 'editar']);
-Route::delete('/usuario/eliminar/{idPolitica}', [ControllerPoliticas::class, 'eliminar']);
+Route::delete('/politicas/eliminar/{idPolitica}', [ControllerPoliticas::class, 'eliminar']);
 
 //login entre otros metodos de autenticacion
 Route::post('login', [ControllerLogin::class,'login']);
@@ -63,5 +68,34 @@ Route::post('/estado', [ControllerEstados::class, 'store']);
 Route::delete('/estado', [ControllerEstados::class, 'destroy']);
 Route::put('/estado', [ControllerEstados::class, 'update']);
 
+//Subcategorias
+Route::get('/subcategorias', [ControllerSubcategorias::class, 'index']);
+Route::post('/subcategorias/crear', [ControllerSubcategorias::class, 'store']);
+Route::put('/subcategorias/editar/{idSubcategoria}', [ControllerSubcategorias::class, 'update']);
+Route::delete('/subcategorias/eliminar/{idSubcategoria}', [ControllerSubcategorias::class, 'destroy']);
+
+//Planes
+Route::get('/planes', [ControllerPlanes::class, 'index']);
+Route::post('/planes/crear', [ControllerPlanes::class, 'store']);
+Route::put('/planes/editar/{idPlan}', [ControllerPlanes::class, 'update']);
+Route::delete('/planes/eliminar/{idPlan}', [ControllerPlanes::class, 'destroy']);
+
+//Administrar Roles
+Route::get('/roles', [ControllerRol::class, 'index']);
+Route::post('/roles/insertar', [ControllerRol::class, 'store']);
+Route::put('/roles/editar/{id}', [ControllerRol::class, 'update']);
+Route::delete('/roles/eliminar/{id}', [ControllerRol::class,'destroy']);
+
+//categorias
+Route::get('/categoria', [ControllerCategorias::class, 'index']);
+Route::post('/categoria/insertar', [ControllerCategorias::class, 'store']);
+Route::put('/categoria/editar/{id}', [ControllerCategorias::class, 'update']);
+Route::delete('/categoria/eliminar/{id}', [ControllerCategorias::class, 'destroy']);
+
+//Reembolsos
+Route::get('/reembolsos', [ControllerReembolsos::class, 'get']);
+Route::post('/reembolsos/create', [ControllerReembolsos::class, 'create']);
+Route::patch('/reembolsos/update/{id}', [ControllerReembolsos::class, 'update']);
 
 Route::post('/notificacion', [ControllerNotificaciones::class, 'val']);
+ 
