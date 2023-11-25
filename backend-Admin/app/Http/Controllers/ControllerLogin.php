@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Mail\ControllerMail;
+use App\Models\Sesion;
 use App\Models\Usuario;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -51,7 +52,11 @@ class ControllerLogin extends Controller
         return response()->json(['message'=> $user],200);
     }
     public function logout(){
+        $sesion=Sesion::find(auth()->user()->id);
+        $sesion->salida=now();
+        $sesion->save();
         auth()->user()->tokens()->delete();
+
         return response()->json(['message'=> 'Se han cerrado los accesos a la cuenta'],200);
     }
     public function test(Request $request){
@@ -93,6 +98,14 @@ class ControllerLogin extends Controller
                 'user' => $user,
 
         ],200);
+            $agent = new Agent();
+            $sesion= new Sesion();
+            $sesion->id_usuario=$user->id;
+            $sesion->ip=$request->ip();
+            $sesion->dispositivo = $agent->device();
+            $sesion->navegador = $agent->browser();
+            $sesion->ingreso= now();
+            $sesion->save();
 
         }else{
 
