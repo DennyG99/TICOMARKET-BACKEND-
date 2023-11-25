@@ -105,5 +105,21 @@ Route::put('/vendedor/modificar/{id}', [ControllerVendedores::class, 'update']);
 Route::get('/vendedor/listar', [ControllerVendedores::class,'index']);
 Route::post('/vendedor/eliminar/{id}', [ControllerVendedores::class, 'eliminarVendedor']);
 
+ 
+//Usuarios
+Route::get('/usuario', [ControllerUsuarios::class, 'index']);
+Route::post('/usuario/insertar', [ControllerUsuarios::class, 'store']);
+Route::put('/usuario/editar/{id}', [ControllerUsuarios::class, 'update']);
+Route::delete('/usuario/eliminar/{id}', [ControllerUsuarios::class, 'destroy']);
+Route::get('/usuario/buscarCorreo/{correo}', [ControllerUsuarios::class, 'busquedaPorCorreo']);
+Route::get('/usuario/buscarNombre/{nombre}', [ControllerUsuarios::class, 'busquedaPorNombre']);
+Route::get('/usuario/buscarRol/{idRol}', [ControllerUsuarios::class, 'busquedaPorRol']);
+Route::get('/usuario/buscarEstado/{idEstado}', [ControllerUsuarios::class, 'busquedaPorEstado']);
+Route::get('/usuario/contarUsuariosPorRol/{idRol}', [ControllerUsuarios::class, 'contarRol']);
+Route::get('/usuario/totalUsuarios', [ControllerUsuarios::class, 'totalUsuarios']);
+Route::get('/usuario/totalUsuariosPorEstado/{idEstado}', [ControllerUsuarios::class, 'totalUsuariosPorEstado']);
+Route::post('/usuario/recuperarContrasena/{id}', [ControllerUsuarios::class, 'recuperarContrasena']);
+Route::post('/usuario/cambioContrasena/{id}', [ControllerUsuarios::class, 'cambioContrasena']);
+
 
 Route::post('/notificacion', [ControllerNotificaciones::class, 'val']);
