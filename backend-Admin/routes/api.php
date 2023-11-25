@@ -97,5 +97,15 @@ Route::get('/reembolsos', [ControllerReembolsos::class, 'get']);
 Route::post('/reembolsos/create', [ControllerReembolsos::class, 'create']);
 Route::patch('/reembolsos/update/{id}', [ControllerReembolsos::class, 'update']);
 
+
+//Vendedor 
+Route::get('/vendedor/mostrar/{id}', [ControllerVendedores::class, 'index']);
+Route::get('/vendedor/editar/{id}', [ControllerVendedores::class, 'edit']);
+Route::get('/vendedor/pdf/{id}', [ControllerVendedores::class, 'exportPDF']);
+Route::put('/vendedor/modificar/{id}', [ControllerVendedores::class, 'update']);
+Route::get('/vendedor/listar', [ControllerVendedores::class,'index']);
+Route::post('/vendedor/eliminar/{id}', [ControllerVendedores::class, 'eliminarVendedor']);
+
+
 Route::post('/notificacion', [ControllerNotificaciones::class, 'val']);
  
