@@ -52,7 +52,6 @@ Route::delete('/politicas/eliminar/{idPolitica}', [ControllerPoliticas::class, '
 //login entre otros metodos de autenticacion
 Route::post('login', [ControllerLogin::class,'login']);
 Route::post('register', [ControllerLogin::class,'register']);
-Route::post('test', [ControllerLogin::class,'test']);
 
 
 Route::middleware('auth:sanctum')->group(function (){
@@ -98,7 +97,7 @@ Route::post('/reembolsos/create', [ControllerReembolsos::class, 'create']);
 Route::patch('/reembolsos/update/{id}', [ControllerReembolsos::class, 'update']);
 
 
-//Vendedor 
+//Vendedor
 Route::get('/vendedor/mostrar/{id}', [ControllerVendedores::class, 'index']);
 Route::get('/vendedor/editar/{id}', [ControllerVendedores::class, 'edit']);
 Route::get('/vendedor/pdf/{id}', [ControllerVendedores::class, 'exportPDF']);
@@ -108,4 +107,3 @@ Route::post('/vendedor/eliminar/{id}', [ControllerVendedores::class, 'eliminarVe
 
 
 Route::post('/notificacion', [ControllerNotificaciones::class, 'val']);
- 

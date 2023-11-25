@@ -59,27 +59,6 @@ class ControllerLogin extends Controller
 
         return response()->json(['message'=> 'Se han cerrado los accesos a la cuenta'],200);
     }
-    public function test(Request $request){
-        $agent = new Agent();
-
-
-        try {
-            $dispositivo = $agent->device();
-            $navegador = $agent->browser();
-            $sistema = $agent->platform();
-        } catch (\Exception $e) {
-            return response()->json(['error' => 'Error al obtener información del agente del usuario.'], 500);
-        }
-
-        return response()->json([
-            //'agent'=>$agent->getUserAgent(),
-            'id' => $request->ip(),
-            'dispositivo' => $dispositivo,
-            'navegador' => $navegador,
-            'sistema' => $sistema,
-        ], 200);
-    }
-
 
     public function verificacionAdmin(Request $request){
 
