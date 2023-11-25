@@ -35,9 +35,7 @@ class ControllerSubcategorias extends Controller
 
             return response()->json(201);
         } catch (QueryException $e) {
-
             $errorCode = $e->errorInfo[1];
-
             if ($errorCode == 1452) {
                 return response()->json(['error' => 'Error de FK: La categoría o estado especificada no existe.'], 400);
             }
