@@ -12,6 +12,7 @@ use App\Http\Controllers\ControllerNotificaciones;
 use App\Http\Controllers\ControllerPlanes;
 use App\Http\Controllers\ControllerSubcategorias;
 use App\Http\Controllers\ControllerCategorias;
+use App\Http\Controllers\ControllerReembolsos;
 use App\Http\Controllers\ControllerRol;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -91,4 +92,10 @@ Route::post('/categoria/insertar', [ControllerCategorias::class, 'store']);
 Route::put('/categoria/editar/{id}', [ControllerCategorias::class, 'update']);
 Route::delete('/categoria/eliminar/{id}', [ControllerCategorias::class, 'destroy']);
 
+//Reembolsos
+Route::get('/reembolsos', [ControllerReembolsos::class, 'get']);
+Route::post('/reembolsos/create', [ControllerReembolsos::class, 'create']);
+Route::patch('/reembolsos/update/{id}', [ControllerReembolsos::class, 'update']);
+
 Route::post('/notificacion', [ControllerNotificaciones::class, 'val']);
+ 
