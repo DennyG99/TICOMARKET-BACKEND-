@@ -10,7 +10,6 @@ class Categoria extends Model
     protected $primaryKey = "idCategoria";
     protected $table  = "Categorias";
     public $timestamps = false;
-
     
     public function productos()
     {

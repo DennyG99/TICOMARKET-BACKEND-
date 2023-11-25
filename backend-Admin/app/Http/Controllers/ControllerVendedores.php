@@ -2,10 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Tienda;
 use App\Models\Usuario;
-use App\Models\Venta;
-use app\Models\Vendedor;
+use App\Models\Vendedor;
+use App\Models\Tienda;
 use Illuminate\Database\QueryException;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -103,13 +102,15 @@ class ControllerVendedores extends Controller
 
     public function mostrarVendedoresCotizados()
     {
-        $vendedoresCotizados = Venta::select('usuarios.nombre AS Nombre_Vendedor', 'tiendas.nombreTienda AS Nombre_Tienda')
-            ->join('usuarios', 'ventas.idUsuario', '=', 'usuarios.id')
-            ->join('tiendas', 'ventas.cedulaJuridica', '=', 'tiendas.cedulaJuridicaTienda')
-            ->join('ventas_productos', 'ventas.idVenta', '=', 'ventas_productos.idVenta')
-            ->join('productos', 'ventas_productos.idProducto', '=', 'productos.idProducto')
-            ->groupBy('usuarios.nombre', 'tiendas.nombreTienda')
-            ->orderByDesc(DB::raw('SUM(productos.precio)'))
+        $vendedoresCotizados = Usuario::select(
+            'usuarios.id',
+            'usuarios.nombre as nombreVendedor',
+            DB::raw('COUNT(ventas.idVenta) as cantidadVentas')
+        )
+            ->join('vendedores', 'usuarios.id', '=', 'vendedores.idVendedor')
+            ->leftJoin('ventas', 'usuarios.id', '=', 'ventas.idUsuario')
+            ->groupBy('usuarios.id', 'usuarios.nombre')
+            ->orderByDesc('cantidadVentas')
             ->get();
 
         return response()->json($vendedoresCotizados);

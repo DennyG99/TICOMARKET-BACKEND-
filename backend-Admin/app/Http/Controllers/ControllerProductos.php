@@ -14,20 +14,19 @@ class ControllerProductos extends Controller
         $productosMasVendidos = Producto::select(
             'productos.nombre as Nombre_Producto',
             'productos.precio as Precio',
-            'productos.descripcion as Descripcion',
-            'usuarios.nombre as Usuario_Dueno_Tienda',
-            DB::raw('count(ventas_productos.idProducto) as Cantidad_Vendida')
+            'usuarios.nombre as Usuario_Dueno_Tienda'
         )
             ->join('ventas_productos', 'productos.idProducto', '=', 'ventas_productos.idProducto')
             ->join('ventas', 'ventas_productos.idVenta', '=', 'ventas.idVenta')
             ->join('tiendas', 'productos.tienda', '=', 'tiendas.idTienda')
             ->join('usuarios', 'tiendas.idTienda', '=', 'usuarios.id')
-            ->join('usuarios_plan', 'usuarios.id', '=', 'usuarios_plan.idUsuario')
-            ->where('usuarios.idRol', 2) //SUPONIENDO QUE EL ROL DE VENDEDOR ES 2
+            ->join('vendedores', 'usuarios.id', '=', 'vendedores.idVendedor')
+            ->where('vendedores.idEstado', 1) //DEPENDE DEL ESTADO DEL VENDEDOR
             ->groupBy('productos.idProducto')
             ->orderByDesc(DB::raw('count(ventas_productos.idProducto)'))
+            ->limit(10) //LIMITANDO A 10 RESULTADOS
             ->get();
-
+    
             return response()->json($productosMasVendidos);
-    }
+        }    
 }
