@@ -108,7 +108,7 @@ class ControllerUsuarios extends Controller
         }
     }
 
-    /*Eliminar Usuarios*/
+    /*Eliminar Usuarios
     public function destroy(string $id)
     {
         try {
@@ -118,7 +118,9 @@ class ControllerUsuarios extends Controller
         } catch (\Exception $e) {
             return response()->json(['message' => 'Usuario no encontrado'], 404);
         }
-    }
+    }*/
+
+    
 
 
     /*Se requiere que los usuarios Super Admin y Administrador realizar búsquedas de usuarios 
