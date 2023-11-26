@@ -8,6 +8,8 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Str;
 use App\Mail\ControllerMail;
+use App\Models\CarritoCompra;
+use App\Models\Compra;
 use Illuminate\Database\QueryException;
 
 class ControllerUsuarios extends Controller
@@ -121,7 +123,42 @@ class ControllerUsuarios extends Controller
     }*/
 
     
+    public function destroy(string $id)
+    {
+        try {
+            $cliente = Usuario::where('id', $id)->first();
 
+            if (!$cliente) {
+                return response()->json(['message' => 'Usuario no encontrado.'], 404);
+            }
+
+            if ($cliente->idRol != 5) {
+                return response()->json(['message' => 'Este usuario no puede ser editado.'], 400);
+            }
+
+            $tieneCarrito = CarritoCompra::where('idUsuario', $id)->exists();
+
+            if ($tieneCarrito) {
+                $compras = Compra::join('carritoCompras', 'compras.idCarrito', '=', 'carritoCompras.idCarrito')
+                    ->join('Usuarios', 'carritoCompras.idUsuario', '=', 'Usuarios.id')
+                    ->where('Usuarios.id', $id)
+                    ->get();
+
+                if ($compras->isNotEmpty()) {
+                    $cliente->idEstado = 2;
+                    $cliente->save();
+                    return response()->json(['message' => 'Se ha cambiado el estado a Inactivo.'], 200);
+                }
+            }
+
+            $cliente->idEstado = 4;
+            $cliente->save();
+
+            return response()->json(['message' => 'Se ha cambiado el estado a Eliminado.'], 200);
+        } catch (\Exception $e) {
+            return response()->json(['message' => 'Error al procesar la solicitud.'], 500);
+        }
+    }
 
     /*Se requiere que los usuarios Super Admin y Administrador realizar búsquedas de usuarios 
     por medio de los siguientes datos: Correo */

@@ -29,14 +29,6 @@ use Illuminate\Support\Facades\Route;
     return $request->user();
 });
 */
-
-
-
-
-
-
-
-
 //login entre otros metodos de autenticacion
 Route::post('login', [ControllerLogin::class, 'login']);
 //Route::post('register', [ControllerLogin::class, 'register']);

@@ -41,8 +41,8 @@ class ControllerLogin extends Controller
         Mail::to($user->correo)->send(new ControllerMail('Verificación de Administrador', 'Mail.validacionUsuarioAdmin', $codigoVerificacionUsuarioAdmin));
         DB::table('usuarios')
             ->where('correo', $user->correo)
-            ->update(['telefono' => $codigoVerificacionUsuarioAdmin]);
-        $token = $user->createToken('auth_token', ['expires_in' => 250])->plainTextToken;
+            ->update(['codigoVerificacion' => $codigoVerificacionUsuarioAdmin]);
+        $token = $user->createToken('auth_token', ['expires_in' => 450])->plainTextToken;
         return response()->json([
             'user' => $user,
             'token' => $token
@@ -69,13 +69,13 @@ class ControllerLogin extends Controller
 
         $codigoAdmin = $request->codigo;
         $user = auth()->user();
-        $codigoAdminBD = DB::table('usuarios')->where('telefono', $codigoAdmin)->where('id', $user->id)->exists();
+        $codigoAdminBD = DB::table('usuarios')->where('codigoVerificacion', $codigoAdmin)->where('id', $user->id)->exists();
 
         if ($codigoAdminBD) {
             $user->tokens()->delete();
             DB::table('usuarios')
-                ->where('telefono', $codigoAdmin)->where('id', $user->id)
-                ->update(['telefono' => '']);
+                ->where('codigoVerificacion', $codigoAdmin)->where('id', $user->id)
+                ->update(['codigoVerificacion' => '']);
             $token = $user->createToken('auth_token')->plainTextToken;
             return response()->json([
                 'token' => $token,
