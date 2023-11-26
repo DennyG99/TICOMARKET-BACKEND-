@@ -8,7 +8,7 @@ use Exception;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Http\Request;
 
-class RoleController extends Controller
+class ControllerRol extends Controller
 {
     // Recupera y devuelve todos los roles junto con su estado asociado.
     // Recupera y devuelve todos los roles junto con su estado asociado.
