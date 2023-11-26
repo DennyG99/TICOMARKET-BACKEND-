@@ -2,24 +2,15 @@
 
 namespace App\Http\Controllers;
 use App\Models\Politicas;
-use App\Controller\ControllerNotificaciones;
-use Illuminate\Support\Facades\Mail;
-use App\Mail\ControllerMail;
 use Illuminate\Http\Request;
-use App\Models\Usuario;
+use Illuminate\Database\QueryException;
 
 class ControllerPoliticas extends Controller
 {
-    public function contenidoNombre(){
-        return request('descripcion');
-        }
-    public function contenidoDescripcion(){
-        return request('nombre');
-        }
-        
+    
     public function MostrarPoliticas(){
-        $politicas = Politicas::orderBy('idPolitica', 'asc')->paginate(3);
-        return $politicas->items(); 
+        $politicas = Politicas::all();
+        return response()->json($politicas,200);
     }
 
     /**
@@ -27,22 +18,21 @@ class ControllerPoliticas extends Controller
      */
     public function crear(Request $request) 
     {
-        
-        $politicas = new Politicas();
-        $politicas->idPolitica = $request->input('idPolitica');
-        $politicas->nombre = $request->input('nombre');
-        $politicas->descripcion = $request->input('descripcion');
-        $politicas->idEstado = $request->input('idEstado');
+        try {
+            $politicas = new Politicas();
+            $politicas->nombre = $request->input('nombre');
+            $politicas->descripcion = $request->input('descripcion');
+            $politicas->idEstado = $request->input('idEstado');
+            $politicas->save();
     
-        $asunto = "Cambio Politicas";
-        $usuarios = Usuario::all();
-       
-        foreach ($usuarios as $usuario) {
-            Mail::to($usuario->correo)->send(new ControllerMail($asunto, 'Mail.cambioPolitica',0));
+            return response()->json($politicas,200);
+        } catch (QueryException $e) {
+            $errorCode = $e->errorInfo[1];
+            if ($errorCode == 1452) {
+                return response()->json(['error' => 'Error de FK: El estado especificada no existe.'], 400);
         }
-    $politicas->save();
-        return response()->json($politicas,200);
     }
+}
 
 
     /**
@@ -50,13 +40,26 @@ class ControllerPoliticas extends Controller
      */
     public function editar(Request $request, string $idPolitica)
     {
-        $politicas = Politicas::find($idPolitica);
-        $politicas->nombre = $request->input('nombre');
-        $politicas->descripcion = $request->input('descripcion');
-        $politicas->idEstado = $request->input('idEstado');
-        $politicas->save();
-
+        try {
+            $politicas = Politicas::find($idPolitica);
+            if (!$politicas) {
+                return response()->json(['message' => 'Politica no encontrada'], 404);
+            }else{
+                
+                $politicas->nombre = $request->input('nombre');
+                $politicas->descripcion = $request->input('descripcion');
+                $politicas->idEstado = $request->input('idEstado');
+                $politicas->save();
+        
+            }
+        }catch (QueryException $e) {
+            $errorCode = $e->errorInfo[1];
+            if ($errorCode == 1452) {
+                return response()->json(['error' => 'Error de FK: El estado especificada no existe.'], 400);
+        }
+       
     }
+}
     /**
      * Remove the specified resource from storage.
      */
@@ -64,7 +67,7 @@ class ControllerPoliticas extends Controller
     {
         $politicas = Politicas::find($idPolitica);
         $politicas->delete();
-        return response()->json($politicas,200);
+        return response()->json(200);
         
     }
 }

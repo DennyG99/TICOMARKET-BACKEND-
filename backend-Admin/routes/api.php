@@ -36,6 +36,8 @@ Route::get('/usuario', [ControllerUsuarios::class, 'getUsuario']);
 Route::post('/usuario/insertar', [ControllerUsuarios::class, 'store']);
 Route::put('/usuario/editar/{id}', [ControllerUsuarios::class, 'update']);
 Route::delete('/usuario/eliminar/{id}', [ControllerUsuarios::class, 'destroy']);
+
+
 //RESUMENES ESTADÍSTICOS DE ADMINISTRADOR
 Route::get('/admin/productos-mas-vendidos', [ControllerProductos::class, 'productosMasVendidos']);
 Route::get('/admin/ingresos-por-anuncios', [ControllerOfertas::class, 'ingresosPorAnuncios']);
