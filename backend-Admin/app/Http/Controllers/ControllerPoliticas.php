@@ -11,7 +11,13 @@ use Illuminate\Support\Facades\Mail;
 
 class ControllerPoliticas extends Controller
 {
-    
+        public function contenidoNombre(){
+        return request('descripcion');
+        }
+    public function contenidoDescripcion(){
+        return request('nombre');
+        }
+        
     public function MostrarPoliticas(){
         $politicas = Politicas::all();
         return response()->json($politicas,200);
