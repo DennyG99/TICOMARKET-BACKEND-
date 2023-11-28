@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ControllerBitacora;
 use App\Http\Controllers\ControllerPoliticas;
 use App\Http\Controllers\ControllerUsuarios;
 use App\Http\Controllers\ControllerLogin;
@@ -33,7 +34,6 @@ use Illuminate\Support\Facades\Route;
 Route::post('login', [ControllerLogin::class, 'login']);
 //Route::post('register', [ControllerLogin::class, 'register']);
 
-
 Route::middleware('auth:sanctum')->group(function () {
     Route::get('logout', [ControllerLogin::class, 'logout']);
     Route::get('user', [ControllerLogin::class, 'getUser']);
@@ -46,17 +46,6 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::delete('/estado', [ControllerEstados::class, 'destroy']);
     Route::put('/estado', [ControllerEstados::class, 'update']);
 
-    //Subcategorias
-    Route::get('/subcategorias', [ControllerSubcategorias::class, 'index']);
-    Route::post('/subcategorias/crear', [ControllerSubcategorias::class, 'store']);
-    Route::put('/subcategorias/editar/{idSubcategoria}', [ControllerSubcategorias::class, 'update']);
-    Route::delete('/subcategorias/eliminar/{idSubcategoria}', [ControllerSubcategorias::class, 'destroy']);
-
-    //Planes
-    Route::get('/planes', [ControllerPlanes::class, 'index']);
-    Route::post('/planes/crear', [ControllerPlanes::class, 'store']);
-    Route::put('/planes/editar/{idPlan}', [ControllerPlanes::class, 'update']);
-    Route::delete('/planes/eliminar/{idPlan}', [ControllerPlanes::class, 'destroy']);
 
     //Administrar Roles
     Route::get('/roles', [ControllerRol::class, 'index']);
@@ -84,12 +73,12 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::get('/vendedor/listar', [ControllerVendedores::class, 'index']);
     Route::post('/vendedor/eliminar/{id}', [ControllerVendedores::class, 'eliminarVendedor']);
 
-
-    //Usuarios
     Route::get('/usuario', [ControllerUsuarios::class, 'index']);
+    //Usuarios
+
     Route::post('/usuario/insertar', [ControllerUsuarios::class, 'store']);
     Route::put('/usuario/editar/{id}', [ControllerUsuarios::class, 'update']);
-    Route::delete('/usuario/eliminar/{id}', [ControllerUsuarios::class, 'destroy']);
+    Route::put('/usuario/eliminar/{id}', [ControllerUsuarios::class, 'destroy']);
     Route::get('/usuario/buscarCorreo/{correo}', [ControllerUsuarios::class, 'busquedaPorCorreo']);
     Route::get('/usuario/buscarNombre/{nombre}', [ControllerUsuarios::class, 'busquedaPorNombre']);
     Route::get('/usuario/buscarRol/{idRol}', [ControllerUsuarios::class, 'busquedaPorRol']);
@@ -100,11 +89,21 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::post('/usuario/recuperarContrasena/{id}', [ControllerUsuarios::class, 'recuperarContrasena']);
     Route::post('/usuario/cambioContrasena/{id}', [ControllerUsuarios::class, 'cambioContrasena']);
 
-    /*Route::get('/usuario', [ControllerUsuarios::class, 'getUsuario']);
-Route::post('/usuario/insertar', [ControllerUsuarios::class, 'store']);
-Route::put('/usuario/editar/{id}', [ControllerUsuarios::class, 'update']);
-Route::delete('/usuario/eliminar/{id}', [ControllerUsuarios::class, 'destroy']);
-*/
+
+    //Subcategorias
+    Route::get('/subcategorias', [ControllerSubcategorias::class, 'index']);
+    Route::post('/subcategorias/crear', [ControllerSubcategorias::class, 'store']);
+    Route::put('/subcategorias/editar/{idSubcategoria}', [ControllerSubcategorias::class, 'update']);
+    Route::delete('/subcategorias/eliminar/{idSubcategoria}', [ControllerSubcategorias::class, 'destroy']);
+
+    //Planes
+    Route::get('/planes', [ControllerPlanes::class, 'index']);
+    Route::post('/planes/crear', [ControllerPlanes::class, 'store']);
+    Route::put('/planes/editar/{idPlan}', [ControllerPlanes::class, 'update']);
+    Route::delete('/planes/eliminar/{idPlan}', [ControllerPlanes::class, 'destroy']);
+
+    Route::get('/bitacora', [ControllerBitacora::class, 'getBitacora']);
+
     Route::post('/notificacion', [ControllerNotificaciones::class, 'val']);
 
     //RESUMENES ESTADÍSTICOS DE ADMINISTRADOR
