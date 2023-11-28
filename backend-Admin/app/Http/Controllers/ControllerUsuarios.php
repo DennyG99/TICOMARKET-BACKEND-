@@ -17,7 +17,14 @@ class ControllerUsuarios extends Controller
     /*Mostrar todos los usuarios registrados*/
     public function index()
     {
-        return response()->json(Usuario::all(), 200);
+        $usuarios = Usuario::with('estado', 'rol')->get();
+        $usuarios = $usuarios ->toArray();
+        foreach ($usuarios as &$usuario) {
+            $usuario['estado'] = $usuario['estado']['nombre'];
+            $usuario['rol'] = $usuario['rol']['nombre'];
+        }
+
+        return response()->json($usuarios, 200);
     }
 
 
@@ -122,7 +129,7 @@ class ControllerUsuarios extends Controller
         }
     }*/
 
-    
+
     public function destroy(string $id)
     {
         try {

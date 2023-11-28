@@ -24,4 +24,14 @@ class Usuario extends Authenticatable
         'remember_token',
     ];
 
+    public function estado()
+    {
+        return $this->belongsTo(Estado::class, 'idEstado');
+    }
+
+    public function rol()
+    {
+        return $this->belongsTo(Rol::class, 'idRol');
+    }
+
 }

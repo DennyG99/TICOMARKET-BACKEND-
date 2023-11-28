@@ -17,8 +17,15 @@ class ControllerRol extends Controller
         try {
             // Obtiene todos los roles y carga su estado relacionado de la base de datos.
             $roles = Rol::with('estado')->get();
+
+            $roles = $roles->toArray();
+
+            foreach ($roles as &$rol) {
+                $rol['estado'] = $rol['estado']['nombre'];
+            }
+
             // Devuelve los roles en formato JSON.
-            return response()->json($roles);
+            return response()->json($roles,200);
         } catch (Exception $e) {
             // En caso de cualquier excepción, devuelve un error 500 con el mensaje de la excepción.
             return response()->json(['error' => $e->getMessage()], 500);
@@ -110,15 +117,12 @@ class ControllerRol extends Controller
             if ($usuario) {
                 $role->idEstado = 2;
                 $role->save();
-                return response()->json(['message'=> 'El rol tiene usuarios, se desactivo'], 200);
-            }
-            else {
+                return response()->json(['message' => 'El rol tiene usuarios, se desactivo'], 200);
+            } else {
                 $role->delete();
                 // Devuelve un mensaje de confirmación.
                 return response()->json(["message" => "Rol eliminado"], 200);
             }
-
-            
         } catch (ModelNotFoundException $e) {
             // Si el rol no se encuentra, devuelve un error 404 con un mensaje.
             return response()->json(['message' => 'Rol no encontrado'], 404);
@@ -127,5 +131,4 @@ class ControllerRol extends Controller
             return response()->json(['error' => $e->getMessage()], 500);
         }
     }
-
 }
