@@ -11,4 +11,15 @@ class Subcategorias extends Model
     public $timestamps =false;
 
 protected $fillable = ['nombre', 'descripcion', 'idEstado','idCategoria'];
+
+public function estado()
+    {
+        return $this->belongsTo(Estado::class, 'idEstado');
+    }
+
+    public function categoria()
+    {
+        return $this->belongsTo(Categoria::class, 'idCategoria');
+    }
+
 }

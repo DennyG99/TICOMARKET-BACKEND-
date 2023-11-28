@@ -8,7 +8,7 @@ use App\Models\Tienda;
 use Illuminate\Database\QueryException;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
-
+use Illuminate\Support\Facades\Hash;
 
 class ControllerVendedores extends Controller
 {
@@ -40,7 +40,7 @@ class ControllerVendedores extends Controller
             $dataVendedores->apellidoUno = $request->apellidoUno;
             $dataVendedores->apellidoDos = $request->apellidoDos;
             $dataVendedores->correo = $request->correo;
-            $dataVendedores->contrasena = $request->contrasena;
+            $dataVendedores->contrasena = Hash::make($request->contrasena);
             $dataVendedores->idRol = $request->idRol;
             $dataVendedores->idEstado = $request->idEstado;
             $dataVendedores->telefono = $request->telefono;

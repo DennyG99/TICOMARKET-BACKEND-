@@ -11,6 +11,7 @@ use App\Mail\ControllerMail;
 use App\Models\CarritoCompra;
 use App\Models\Compra;
 use Illuminate\Database\QueryException;
+use Illuminate\Support\Arr;
 
 class ControllerUsuarios extends Controller
 {
@@ -18,7 +19,7 @@ class ControllerUsuarios extends Controller
     public function index()
     {
         $usuarios = Usuario::with('estado', 'rol')->get();
-        $usuarios = $usuarios ->toArray();
+        $usuarios = $usuarios->toArray();
         foreach ($usuarios as &$usuario) {
             $usuario['estado'] = $usuario['estado']['nombre'];
             $usuario['rol'] = $usuario['rol']['nombre'];
@@ -41,8 +42,6 @@ class ControllerUsuarios extends Controller
                 'contrasena' => 'required',
                 'idRol' => 'required',
                 'idEstado' => 'required',
-                'fechaAcceso' => 'required',
-                'tiempoInactividad' => 'required',
                 'telefono' => 'required'
             ]);
 
@@ -56,8 +55,6 @@ class ControllerUsuarios extends Controller
             $usuario->contrasena = Hash::make($input['contrasena']);
             $usuario->idRol = $input['idRol'];
             $usuario->idEstado = $input['idEstado'];
-            $usuario->fechaAcceso = $input['fechaAcceso'];
-            $usuario->tiempoInactividad = $input['tiempoInactividad'];
             //  $usuario->fotoCedula = $input['fotoCedula'];
             $usuario->telefono = $input['telefono'];
 
@@ -102,9 +99,6 @@ class ControllerUsuarios extends Controller
             $usuario->correo = $input['correo'];
             $usuario->idRol = $input['idRol'];
             $usuario->idEstado = $input['idEstado'];
-            // $usuario->fechaAcceso = $input['fechaAcceso'];
-            // $usuario->tiempoInactividad = $input['tiempoInactividad'];
-            //  $usuario->fotoCedula = $input['fotoCedula'];
             $usuario->telefono = $input['telefono'];
 
             $usuario->save();
@@ -117,18 +111,7 @@ class ControllerUsuarios extends Controller
         }
     }
 
-    /*Eliminar Usuarios
-    public function destroy(string $id)
-    {
-        try {
-            $item = Usuario::find($id);
-            $item->delete();
-            return response()->json(["message" => "Usuario eliminado correctamente"], 200);
-        } catch (\Exception $e) {
-            return response()->json(['message' => 'Usuario no encontrado'], 404);
-        }
-    }*/
-
+    /*Eliminar Usuarios*/
 
     public function destroy(string $id)
     {
@@ -230,12 +213,12 @@ class ControllerUsuarios extends Controller
         try {
             $usuario = Usuario::where('idEstado', $idEstado)->get();
 
-            if ($usuario) {
+            if ($usuario->count() > 0) {
                 $datosUsuario = $usuario->makeHidden(['idEstado']);
 
                 return response()->json($datosUsuario, 200);
             } else {
-                return response()->json(['message' => 'Usuario no encontrado'], 404);
+                return response()->json(['message' => 'No hay usuarios con ese estado'], 404);
             }
         } catch (\Exception $e) {
             return response()->json(['message' => 'Error al procesar la solicitud'], 500);

@@ -1,9 +1,13 @@
 <?php
 
 namespace App\Http\Controllers;
+
+use App\Mail\ControllerMail;
 use App\Models\Politicas;
+use App\Models\Usuario;
 use Illuminate\Http\Request;
 use Illuminate\Database\QueryException;
+use Illuminate\Support\Facades\Mail;
 
 class ControllerPoliticas extends Controller
 {
@@ -24,7 +28,14 @@ class ControllerPoliticas extends Controller
             $politicas->descripcion = $request->input('descripcion');
             $politicas->idEstado = $request->input('idEstado');
             $politicas->save();
-    
+
+            $asunto = "Cambio Politicas";
+            $usuarios = Usuario::all();
+           
+            foreach ($usuarios as $usuario) {
+                Mail::to($usuario->correo)->send(new ControllerMail($asunto, 'Mail.cambioPolitica',0,""));
+            }
+
             return response()->json($politicas,200);
         } catch (QueryException $e) {
             $errorCode = $e->errorInfo[1];

@@ -14,7 +14,14 @@ class ControllerSubcategorias extends Controller
      */
     public function index(Request $request)
     {
-        $subcategorias = Subcategorias::all();
+        $subcategorias = Subcategorias::with('estado', 'categoria')->get();
+
+        $subcategorias = $subcategorias->toArray();
+        foreach ($subcategorias as &$subcategoria) {
+            $subcategoria['estado'] = $subcategoria['estado']['nombre'];
+            $subcategoria['categoria'] = $subcategoria['categoria']['nombre'];
+        }
+
         return response()->json($subcategorias);
     }
 

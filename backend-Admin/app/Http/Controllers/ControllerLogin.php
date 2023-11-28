@@ -32,21 +32,22 @@ class ControllerLogin extends Controller
     public function login(Request $request)
     {
 
-        if (!usuario::where('correo', $request->correo)->where('contrasena', $request->contrasena)) {
-            return response()->json(['message' => 'Correo o contraseña incorrectos'], 401);
-        }
-
-        $user = usuario::where('correo', $request->correo)->firstOrFail();
-        $codigoVerificacionUsuarioAdmin = mt_rand(100000, 999999);
-        Mail::to($user->correo)->send(new ControllerMail('Verificación de Administrador', 'Mail.validacionUsuarioAdmin', $codigoVerificacionUsuarioAdmin));
-        DB::table('usuarios')
-            ->where('correo', $user->correo)
-            ->update(['codigoVerificacion' => $codigoVerificacionUsuarioAdmin]);
-        $token = $user->createToken('auth_token', ['expires_in' => 450])->plainTextToken;
-        return response()->json([
-            'user' => $user,
-            'token' => $token
-        ], 200);
+        $usuario = Usuario::where('correo', $request->correo)->first();
+            if (!$usuario || !password_verify($request->contrasena, $usuario->contrasena)) {
+                return response()->json(['message' => 'Datos incorrecta'], 401);
+            } else {
+                $user = usuario::where('correo', $request->correo)->firstOrFail();
+                $codigoVerificacionUsuarioAdmin = mt_rand(100000, 999999);
+                Mail::to($user->correo)->send(new ControllerMail('Verificación de Administrador', 'Mail.validacionUsuarioAdmin', $codigoVerificacionUsuarioAdmin, ''));
+                DB::table('usuarios')
+                    ->where('correo', $user->correo)
+                    ->update(['codigoVerificacion' => $codigoVerificacionUsuarioAdmin]);
+                $token = $user->createToken('auth_token', ['expires_in' => 450])->plainTextToken;
+                return response()->json([
+                    'user' => $user,
+                    'token' => $token
+                ], 200);
+            }
     }
 
     public function getUser()
