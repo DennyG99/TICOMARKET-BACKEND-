@@ -15,16 +15,14 @@ class ControllerVendedores extends Controller
 
     public function index($id)
     {
-
-
         $vendedores = Usuario::join('estados', 'usuarios.idEstado', '=', 'estados.id')
             ->join('vendedores', 'vendedores.idVendedor', '=', 'usuarios.id')
             ->join('tiendas', 'tiendas.idVendedor', '=', 'vendedores.idVendedor')
-            ->select('estados.*', 'vendedores.*', 'tiendas.*', 'usuarios.*')
+            ->select('estados.nombre', 'vendedores.*', 'tiendas.*', 'usuarios.*')
             ->where('usuarios.id', '=', $id)
             ->get();
         return response()->json($vendedores, 200);
-    } //End index
+ } //End index
 
     public function edit($id)
     {

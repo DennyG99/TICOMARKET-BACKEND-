@@ -20,50 +20,48 @@ use App\Models\Vendedor;
 class ControllerEstados extends Controller
 {
     //GET
-    public function index(Request $request)
+    public function index($id = null)
     {
-        // Obtener la cantidad de registros por página desde la consulta o establecer un valor predeterminado
-        $perPage = $request->input('per_page', 10);
-    
-        // Obtener la página actual desde la consulta o establecer un valor predeterminado
-        $currentPage = $request->input('page', 1);
-    
-        // Realizar la consulta paginada
-        $estados = Estado::paginate($perPage, ['*'], 'page', $currentPage);
-    
-        return response()->json($estados);
+        if (!$id) {
+            $estados = Estado::all();
+            return response()->json($estados);
+        } else {
+            $estados = Estado::find($id);
+            return response()->json($estados);
+        }
     }
     //PUT
-    public function store(Request $request){
+    public function store(Request $request)
+    {
         $request->validate([
             'nombre' => 'required',
             'descripcion' => 'required',
             'status' => 'required'
         ]);
-    
+
         $state = Estado::create($request->all());
         return response()->json($state, 201);
     }
     //update
-    public function update(Request $request){
-        $id = $request->query('id');
+    public function update(Request $request, $id)
+    {
         if (!$id) {
             return response()->json(['message' => 'ID no proporcionado'], 400);
         }
 
         $state = Estado::find($id);
-        if(!$state){
+        if (!$state) {
             return response()->json(['message' => 'Nota no encontrada'], 404);
         }
-    
         $state->update($request->all());
         return response()->json($state);
     }
+
     //DELETE
-    
-    public function destroy(Request $request)
+
+    public function destroy(Request $request, $id)
     {
-        $id = $request->query('id');
+        
         //se le asigna la sub donde idestado = $id y idEstado = 1
         $estado = Estado::where('id', $id)->first();
 
@@ -83,37 +81,36 @@ class ControllerEstados extends Controller
                 return response()->json(['message' => 'El Estado está ligado a una categoria'], 200);
             }
             $reembolso = Reembolsos::where('idEstado', $id)->first();
-            if ($reembolso){
+            if ($reembolso) {
                 return response()->json(['message' => 'El Estado está ligado a un reembolso'], 200);
             }
             $rol = Rol::where('idEstado', $id)->first();
-            if ($rol){
+            if ($rol) {
                 return response()->json(['message' => 'El Estado está ligado a un Rol'], 200);
             }
             $plan = Planes::where('idEstado', $id)->first();
-            if ($plan){
+            if ($plan) {
                 return response()->json(['message' => 'El Estado está ligado a un plan'], 200);
             }
             $politica = Politicas::where('idEstado', $id)->first();
-            if ($politica){
+            if ($politica) {
                 return response()->json(['message' => 'El Estado está ligado a una politica'], 200);
             }
             $subcategoria = Subcategorias::where('idEstado', $id)->first();
-            if ($subcategoria){
+            if ($subcategoria) {
                 return response()->json(['message' => 'El Estado está ligado a una subcategoria'], 200);
             }
             $producto = Producto::where('estado', $id)->first();
-            if ($producto){
+            if ($producto) {
                 return response()->json(['message' => 'El Estado está ligado a un producto'], 200);
             }
             $usuario = Usuario::where('idEstado', $id)->first();
-            if ($usuario){
+            if ($usuario) {
                 return response()->json(['message' => 'El Estado está ligado a un usuario'], 200);
-            }
-            else {
+            } else {
                 $estado->delete();
                 return response()->json(['message' => 'estado Eliminada'], 200);
             }
         }
-}
+    }
 }
