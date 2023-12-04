@@ -28,7 +28,8 @@ class ControllerPoliticas extends Controller
                 'idPolitica' => $politica->idPolitica,
                 'nombre' => $politica->nombre,
                 'descripcion' => $politica->descripcion,
-                'estado' => $politica->estado->status,
+                'idEstado' => $politica->idEstado,
+                'estado' => $politica->estado->nombre,
             ];
         });
 

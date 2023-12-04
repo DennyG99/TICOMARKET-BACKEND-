@@ -10,4 +10,9 @@ class Politicas extends Model
     protected $primaryKey = "idPolitica";
     protected $table  = "politicas";
     public $timestamps = false;
+
+    public function estado()
+    {
+        return $this->belongsTo(Estado::class, 'idEstado');
+    }
 }
