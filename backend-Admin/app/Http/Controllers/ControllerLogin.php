@@ -87,7 +87,7 @@ class ControllerLogin extends Controller
             $sesion->navegador = $agent->browser();
             $sesion->ingreso = now();
             $sesion->save();
-            //Aqui migue
+
             return response()->json([
                 'token'=> $token,
                 'user' => $user,
