@@ -12,4 +12,10 @@ class Planes extends Model
     public $timestamps =false;
 
     protected $fillable = ['nombre', 'descripcion', 'tipoPlan','precio','idEstado'];
+
+    public function estado()
+    {
+        return $this->belongsTo(Estado::class, 'idEstado');
+    }
+
 }

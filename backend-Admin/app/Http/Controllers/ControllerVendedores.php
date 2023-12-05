@@ -8,23 +8,21 @@ use App\Models\Tienda;
 use Illuminate\Database\QueryException;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
-
+use Illuminate\Support\Facades\Hash;
 
 class ControllerVendedores extends Controller
 {
 
     public function index($id)
     {
-
-
         $vendedores = Usuario::join('estados', 'usuarios.idEstado', '=', 'estados.id')
             ->join('vendedores', 'vendedores.idVendedor', '=', 'usuarios.id')
             ->join('tiendas', 'tiendas.idVendedor', '=', 'vendedores.idVendedor')
-            ->select('estados.*', 'vendedores.*', 'tiendas.*', 'usuarios.*')
+            ->select('estados.nombre', 'vendedores.*', 'tiendas.*', 'usuarios.*')
             ->where('usuarios.id', '=', $id)
             ->get();
         return response()->json($vendedores, 200);
-    } //End index
+ } //End index
 
     public function edit($id)
     {
@@ -40,7 +38,7 @@ class ControllerVendedores extends Controller
             $dataVendedores->apellidoUno = $request->apellidoUno;
             $dataVendedores->apellidoDos = $request->apellidoDos;
             $dataVendedores->correo = $request->correo;
-            $dataVendedores->contrasena = $request->contrasena;
+            $dataVendedores->contrasena = Hash::make($request->contrasena);
             $dataVendedores->idRol = $request->idRol;
             $dataVendedores->idEstado = $request->idEstado;
             $dataVendedores->telefono = $request->telefono;

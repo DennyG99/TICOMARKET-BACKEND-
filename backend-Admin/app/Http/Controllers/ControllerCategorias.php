@@ -12,7 +12,13 @@ class ControllerCategorias extends Controller
     /*El sistema permitirá visualizar una lista de las categorías existentes, donde mostrará los campos id y su nombre y estado.*/
     public function index()
     {
-        return response()->json(Categoria::all(), 200);
+        $categorias = Categoria::with('estado')->get();
+        $categorias = $categorias->toArray();
+        foreach ($categorias as &$categoria) {
+            $categoria['estado'] = $categoria['estado']['nombre'];
+        }
+        return response()->json($categoria,200);
+
     }
 
 

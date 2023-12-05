@@ -22,7 +22,7 @@ class ControllerNotificaciones extends Controller
             $usuarios = Usuario::all();
        
             foreach ($usuarios as $usuario) {
-                Mail::to($usuario->correo)->send(new ControllerMail($asunto, 'Mail.noti',0));
+                Mail::to($usuario->correo)->send(new ControllerMail($asunto, 'Mail.noti',0,''));
             }
             // Verifica que el usuario ingresado exista en la BD
     

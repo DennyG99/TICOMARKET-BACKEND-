@@ -11,7 +11,14 @@ class ControllerPlanes extends Controller
 {
     public function index(Request $request)
     {
-        $planes = Planes::all();
+        $planes = Planes::with('estado')->get();
+
+        $planes = $planes->toArray();
+
+        foreach ($planes as &$plan) {
+            $plan['estado'] = $plan['estado']['nombre'];
+        }
+
         return response()->json($planes);
     }
 
