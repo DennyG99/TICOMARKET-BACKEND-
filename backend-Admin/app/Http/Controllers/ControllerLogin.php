@@ -72,19 +72,21 @@ class ControllerLogin extends Controller
             ->where('telefono', $codigoAdmin)->where('id', $user->id)
             ->update(['telefono' => '']);
             $token = $user->createToken('auth_token')->plainTextToken;
-            return response()->json([
-                'token'=> $token,
-                'user' => $user,
-
-        ],200);
             $agent = new Agent();
             $sesion= new Sesion();
             $sesion->id_usuario=$user->id;
-            $sesion->ip=$request->ip();
+            $sesion->ip=$request->ip()."";
             $sesion->dispositivo = $agent->device();
             $sesion->navegador = $agent->browser();
             $sesion->ingreso= now();
             $sesion->save();
+            return response()->json([
+                'token'=> $token,
+                'user' => $user,
+                'Sesion' => $sesion,
+
+        ],200);
+
 
         }else{
 
