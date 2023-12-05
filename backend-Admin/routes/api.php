@@ -32,10 +32,7 @@ use Illuminate\Support\Facades\Route;
 */
 //login entre otros metodos de autenticacion
 //Estados
-Route::get('/estado/{id?}', [ControllerEstados::class, 'index']);
-Route::post('/estado/crear', [ControllerEstados::class, 'store']);
-Route::delete('/estado/eliminar/{id}', [ControllerEstados::class, 'destroy']);
-Route::put('/estado/editar/{id}', [ControllerEstados::class, 'update']);
+
 
 Route::post('login', [ControllerLogin::class, 'login']);
 //Route::post('register', [ControllerLogin::class, 'register']);
@@ -45,8 +42,11 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::get('user', [ControllerLogin::class, 'getUser']);
     Route::post('/verificacion', [ControllerLogin::class, 'verificacionAdmin']);
 
+    Route::get('/estado/{id?}', [ControllerEstados::class, 'index']);
+    Route::post('/estado/crear', [ControllerEstados::class, 'store']);
+    Route::delete('/estado/eliminar/{id}', [ControllerEstados::class, 'destroy']);
+    Route::put('/estado/editar/{id}', [ControllerEstados::class, 'update']);
 
-    
 
 
     //Administrar Roles
@@ -116,9 +116,9 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::get('/admin/vendedores-cotizados', [ControllerVendedores::class, 'mostrarVendedoresCotizados']);
 
     //Administrar Políticas
-    Route::get('/politicas', [ControllerPoliticas::class, 'MostrarPoliticas']);
-    
+    Route::post('/politicas/crear', [ControllerPoliticas::class, 'crear']);
+
     Route::put('/politicas/editar/{idPolitica}', [ControllerPoliticas::class, 'editar']);
     Route::delete('/politicas/eliminar/{idPolitica}', [ControllerPoliticas::class, 'eliminar']);
+    Route::get('/politicas', [ControllerPoliticas::class, 'MostrarPoliticas']);
 });
-Route::post('/politicas/crear', [ControllerPoliticas::class, 'crear']);
