@@ -57,7 +57,7 @@ class ControllerLogin extends Controller
     }
     public function logout()
     {
-        $sesion = Sesion::find(auth()->user()->id);
+        $sesion = Sesion::find(auth()->user()->id)->first()->get();
         $sesion->salida = now();
         $sesion->save();
         auth()->user()->tokens()->delete();
