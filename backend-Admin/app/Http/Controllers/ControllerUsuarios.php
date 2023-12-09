@@ -35,6 +35,7 @@ class ControllerUsuarios extends Controller
     {
         try {
             $request->validate([
+                'cedula' => 'required',
                 'nombre' => 'required',
                 'apellidoUno' => 'required',
                 'apellidoDos' => 'required',
@@ -48,6 +49,7 @@ class ControllerUsuarios extends Controller
             $input = $request->all();
 
             $usuario = new Usuario();
+            $usuario->cedula = $input['cedula'];
             $usuario->nombre = $input['nombre'];
             $usuario->apellidoUno = $input['apellidoUno'];
             $usuario->apellidoDos = $input['apellidoDos'];
@@ -80,6 +82,7 @@ class ControllerUsuarios extends Controller
         try {
 
             $request->validate([
+                'cedula' => 'required',
                 'nombre' => 'required',
                 'apellidoUno' => 'required',
                 'apellidoDos' => 'required',
@@ -92,7 +95,7 @@ class ControllerUsuarios extends Controller
 
             $usuario = Usuario::find($id);
             $input = $request->all();
-
+            $usuario->cedula = $input['cedula'];
             $usuario->nombre = $input['nombre'];
             $usuario->apellidoUno = $input['apellidoUno'];
             $usuario->apellidoDos = $input['apellidoDos'];
