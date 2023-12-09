@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Vendedor extends Model
 {
     protected $table = 'vendedores';
-    protected $primaryKey = 'idVendedores';
+    protected $primaryKey = 'idVendedor';
     public $timestamps = false;
 
     public function estado()
