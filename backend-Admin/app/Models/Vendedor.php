@@ -10,4 +10,14 @@ class Vendedor extends Model
     protected $table = 'vendedores';
     protected $primaryKey = 'idVendedores';
     public $timestamps = false;
+
+    public function estado()
+    {
+        return $this->belongsTo(Estado::class, 'idEstado');
+    }
+
+    public function rol()
+    {
+        return $this->belongsTo(Rol::class, 'idRol');
+    }
 }

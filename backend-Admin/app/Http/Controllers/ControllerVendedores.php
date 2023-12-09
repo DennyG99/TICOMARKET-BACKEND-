@@ -13,16 +13,28 @@ use Illuminate\Support\Facades\Hash;
 class ControllerVendedores extends Controller
 {
 
-    public function index($id)
+    public function index($id = null)
     {
-        $vendedores = Usuario::join('estados', 'usuarios.idEstado', '=', 'estados.id')
-            ->join('vendedores', 'vendedores.idVendedor', '=', 'usuarios.id')
-            ->join('tiendas', 'tiendas.idVendedor', '=', 'vendedores.idVendedor')
-            ->select('estados.nombre', 'vendedores.*', 'tiendas.*', 'usuarios.*')
-            ->where('usuarios.id', '=', $id)
-            ->get();
-        return response()->json($vendedores, 200);
- } //End index
+        if (!$id) {
+            $vendedores = Usuario::where('idRol', '=', 4)->with('estado', 'rol')->get();
+
+
+            $vendedores = $vendedores->toArray();
+            foreach ($vendedores  as &$vendedor) {
+                $vendedor['estado'] = $vendedor['estado']['nombre'];
+                $vendedor['rol'] = $vendedor['rol']['nombre'];
+            }
+            return response()->json($vendedores);
+        } else {
+            $vendedores = Usuario::join('estados', 'usuarios.idEstado', '=', 'estados.id')
+                ->join('vendedores', 'vendedores.idVendedor', '=', 'usuarios.id')
+                ->join('tiendas', 'tiendas.idVendedor', '=', 'vendedores.idVendedor')
+                ->select('estados.nombre', 'vendedores.*', 'tiendas.*', 'usuarios.*')
+                ->where('usuarios.id', '=', $id)
+                ->get();
+            return response()->json($vendedores, 200);
+        }
+    } //End index
 
     public function edit($id)
     {
@@ -33,7 +45,7 @@ class ControllerVendedores extends Controller
     public function update(Request $request, $id)
     {
         try {
-            $dataVendedores = Usuario::find($id);  
+            $dataVendedores = Usuario::find($id);
             $dataVendedores->cedula = $request->cedula;
             $dataVendedores->nombre = $request->nombre;
             $dataVendedores->apellidoUno = $request->apellidoUno;

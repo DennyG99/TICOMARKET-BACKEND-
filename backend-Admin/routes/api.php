@@ -37,10 +37,14 @@ use Illuminate\Support\Facades\Route;
 Route::post('login', [ControllerLogin::class, 'login']);
 //Route::post('register', [ControllerLogin::class, 'register']);
 
+
+
+
 Route::middleware('auth:sanctum')->group(function () {
     Route::get('logout', [ControllerLogin::class, 'logout']);
     Route::get('user', [ControllerLogin::class, 'getUser']);
     Route::post('/verificacion', [ControllerLogin::class, 'verificacionAdmin']);
+
 
     Route::get('/estado/{id?}', [ControllerEstados::class, 'index']);
     Route::post('/estado/crear', [ControllerEstados::class, 'store']);
@@ -68,12 +72,12 @@ Route::middleware('auth:sanctum')->group(function () {
 
 
     //Vendedor
-    Route::get('/vendedor/mostrar/{id}', [ControllerVendedores::class, 'index']);
-    Route::get('/vendedor/editar/{id}', [ControllerVendedores::class, 'edit']);
+    Route::get('/vendedor/mostrar/{id?}', [ControllerVendedores::class, 'index']);
     Route::get('/vendedor/pdf/{id}', [ControllerVendedores::class, 'exportPDF']);
     Route::put('/vendedor/modificar/{id}', [ControllerVendedores::class, 'update']);
-    Route::get('/vendedor/listar', [ControllerVendedores::class, 'index']);
     Route::post('/vendedor/eliminar/{id}', [ControllerVendedores::class, 'eliminarVendedor']);
+
+
 
     Route::get('/usuario', [ControllerUsuarios::class, 'index']);
     //Usuarios
