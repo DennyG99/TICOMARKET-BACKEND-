@@ -33,21 +33,21 @@ class ControllerLogin extends Controller
     {
 
         $usuario = Usuario::where('correo', $request->correo)->first();
-            if (!$usuario || !password_verify($request->contrasena, $usuario->contrasena)) {
-                return response()->json(['message' => 'Datos incorrecta'], 401);
-            } else {
-                $user = usuario::where('correo', $request->correo)->firstOrFail();
-                $codigoVerificacionUsuarioAdmin = mt_rand(100000, 999999);
-                Mail::to($user->correo)->send(new ControllerMail('Verificación de Administrador', 'Mail.validacionUsuarioAdmin', $codigoVerificacionUsuarioAdmin, ''));
-                DB::table('usuarios')
-                    ->where('correo', $user->correo)
-                    ->update(['codigoVerificacion' => $codigoVerificacionUsuarioAdmin]);
-                $token = $user->createToken('auth_token', ['expires_in' => 450])->plainTextToken;
-                return response()->json([
-                    'user' => $user,
-                    'token' => $token
-                ], 200);
-            }
+        if (!$usuario || !password_verify($request->contrasena, $usuario->contrasena)) {
+            return response()->json(['message' => 'Datos incorrecta'], 401);
+        } else {
+            $user = usuario::where('correo', $request->correo)->firstOrFail();
+            $codigoVerificacionUsuarioAdmin = mt_rand(100000, 999999);
+            Mail::to($user->correo)->send(new ControllerMail('Verificación de Administrador', 'Mail.validacionUsuarioAdmin', $codigoVerificacionUsuarioAdmin, ''));
+            DB::table('usuarios')
+                ->where('correo', $user->correo)
+                ->update(['codigoVerificacion' => $codigoVerificacionUsuarioAdmin]);
+            $token = $user->createToken('auth_token', ['expires_in' => 450])->plainTextToken;
+            return response()->json([
+                'user' => $user,
+                'token' => $token
+            ], 200);
+        }
     }
 
     public function getUser()
@@ -57,12 +57,18 @@ class ControllerLogin extends Controller
     }
     public function logout()
     {
-        $sesion = Sesion::find(auth()->user()->id)->first()->get();
-        $sesion->salida = now();
-        $sesion->save();
-        auth()->user()->tokens()->delete();
+        $sesion = Sesion::where('id_usuario', auth()->user()->id)
+            ->where('salida', null)
+            ->first();
 
-        return response()->json(['message' => 'Se han cerrado los accesos a la cuenta'], 200);
+        if ($sesion) {
+            $sesion->salida = now();
+            $sesion->save();
+            auth()->user()->tokens()->delete();
+            return response()->json(['message' => 'Se han cerrado los accesos a la cuenta'], 200);
+        }
+        //return response()->json($sesion);
+
     }
 
     public function verificacionAdmin(Request $request)
@@ -80,22 +86,20 @@ class ControllerLogin extends Controller
             $token = $user->createToken('auth_token')->plainTextToken;
 
             $agent = new Agent();
-            $sesion= new Sesion();
-            $sesion->id_usuario=$user->id;
-            $sesion->ip=$request->ip()."";
+            $sesion = new Sesion();
+            $sesion->id_usuario = $user->id;
+            $sesion->ip = $request->ip() . "";
             $sesion->dispositivo = $agent->device();
             $sesion->navegador = $agent->browser();
             $sesion->ingreso = now();
             $sesion->save();
 
             return response()->json([
-                'token'=> $token,
+                'token' => $token,
                 'user' => $user,
                 'Sesion' => $sesion,
 
-        ],200);
-
-
+            ], 200);
         } else {
             return response()->json(['message' => 'error'], 404);
         }
