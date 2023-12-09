@@ -33,7 +33,8 @@ class ControllerVendedores extends Controller
     public function update(Request $request, $id)
     {
         try {
-            $dataVendedores = Usuario::find($id);
+            $dataVendedores = Usuario::find($id);  
+            $dataVendedores->cedula = $request->cedula;
             $dataVendedores->nombre = $request->nombre;
             $dataVendedores->apellidoUno = $request->apellidoUno;
             $dataVendedores->apellidoDos = $request->apellidoDos;
