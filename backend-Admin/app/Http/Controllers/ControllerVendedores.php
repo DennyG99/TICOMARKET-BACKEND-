@@ -16,22 +16,26 @@ class ControllerVendedores extends Controller
     public function index($id = null)
     {
         if (!$id) {
-            $vendedores = Usuario::where('idRol', '=', 4)->with('estado', 'rol')->get();
-
-
-            $vendedores = $vendedores->toArray();
-            foreach ($vendedores  as &$vendedor) {
-                $vendedor['estado'] = $vendedor['estado']['nombre'];
-                $vendedor['rol'] = $vendedor['rol']['nombre'];
-            }
+            //$vendedores = Usuario::where('idRol', '=', 4)->with('estado', 'rol','vendedor')->get();
+            $vendedores = Usuario::join('estados', 'usuarios.idEstado', '=', 'estados.id')
+            ->join('vendedores', 'vendedores.idVendedor', '=', 'usuarios.id')
+            ->select( 'vendedores.*', 'usuarios.id',
+            'usuarios.cedula','usuarios.nombre','usuarios.apellidoUno','usuarios.apellidoDos','usuarios.correo',
+            'usuarios.contrasena','usuarios.idRol','usuarios.telefono','usuarios.codigoVerificacion','estados.nombre')
+            ->where('usuarios.idRol', '=', '4')
+            ->get();
             return response()->json($vendedores);
+
         } else {
             $vendedores = Usuario::join('estados', 'usuarios.idEstado', '=', 'estados.id')
                 ->join('vendedores', 'vendedores.idVendedor', '=', 'usuarios.id')
                 ->join('tiendas', 'tiendas.idVendedor', '=', 'vendedores.idVendedor')
-                ->select('estados.nombre', 'vendedores.*', 'tiendas.*', 'usuarios.*')
+                ->select('estados.nombre', 'vendedores.*', 'tiendas.*', 'usuarios.id',
+                'usuarios.cedula','usuarios.nombre','usuarios.apellidoUno','usuarios.apellidoDos','usuarios.correo',
+                'usuarios.contrasena','usuarios.idRol','usuarios.telefono','usuarios.codigoVerificacion')
                 ->where('usuarios.id', '=', $id)
                 ->get();
+                
             return response()->json($vendedores, 200);
         }
     } //End index
