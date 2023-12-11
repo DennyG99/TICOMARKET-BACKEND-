@@ -59,18 +59,22 @@ class ControllerVendedores extends Controller
     public function update(Request $request, $id)
     {
         try {
-            $dataVendedores = Usuario::find($id);
-            $dataVendedores->cedula = $request->cedula;
-            $dataVendedores->nombre = $request->nombre;
-            $dataVendedores->apellidoUno = $request->apellidoUno;
-            $dataVendedores->apellidoDos = $request->apellidoDos;
-            $dataVendedores->correo = $request->correo;
-            $dataVendedores->contrasena = Hash::make($request->contrasena);
-            $dataVendedores->idRol = $request->idRol;
-            $dataVendedores->idEstado = $request->idEstado;
-            $dataVendedores->telefono = $request->telefono;
-            $dataVendedores->save();
-            return response()->json($dataVendedores, 200);
+
+            $usuarioVendedor = Usuario::find($id);
+            $vendedor = Vendedor::find($id);
+            $usuarioVendedor->cedula = $request->cedula;
+            $usuarioVendedor->nombre = $request->nombre;
+            $usuarioVendedor->apellidoUno = $request->apellidoUno;
+            $usuarioVendedor->apellidoDos = $request->apellidoDos;
+            $usuarioVendedor->correo = $request->correo;
+            $usuarioVendedor->contrasena = Hash::make($request->contrasena);
+            $usuarioVendedor->idRol = $request->idRol;
+            $usuarioVendedor->idEstado = $request->idEstado;
+            $vendedor->idEstado = $request->idEstado;
+            $usuarioVendedor->telefono = $request->telefono;
+            $usuarioVendedor->save();
+            $vendedor->save();
+            return response()->json($usuarioVendedor);
         } catch (QueryException $e) {
             $errorCode = $e->errorInfo[1];
             if ($errorCode == 1452) {
