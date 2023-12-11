@@ -17,11 +17,12 @@ class ControllerVendedores extends Controller
     {
         if (!$id) {
             //$vendedores = Usuario::where('idRol', '=', 4)->with('estado', 'rol','vendedor')->get();
-            $vendedores = Usuario::join('estados', 'usuarios.idEstado', '=', 'estados.id')
-            ->join('vendedores', 'vendedores.idVendedor', '=', 'usuarios.id')
+            $vendedores = Usuario::join('vendedores', 'vendedores.idVendedor', '=', 'usuarios.id')
+            ->join('estados', 'vendedores.idEstado', '=', 'estados.id')
+            ->join('roles','roles.id','=','usuarios.idRol')
             ->select( 'vendedores.*', 'usuarios.id',
             'usuarios.cedula','usuarios.nombre','usuarios.apellidoUno','usuarios.apellidoDos','usuarios.correo',
-            'usuarios.contrasena','usuarios.idRol','usuarios.telefono','usuarios.codigoVerificacion','estados.nombre')
+            'usuarios.contrasena','usuarios.idRol','usuarios.telefono','usuarios.codigoVerificacion','roles.nombre','estados.nombre')
             ->where('usuarios.idRol', '=', '4')
             ->get();
             return response()->json($vendedores);
