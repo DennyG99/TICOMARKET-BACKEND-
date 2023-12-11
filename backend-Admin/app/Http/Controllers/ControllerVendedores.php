@@ -21,8 +21,17 @@ class ControllerVendedores extends Controller
             ->join('estados', 'vendedores.idEstado', '=', 'estados.id')
             ->join('roles','roles.id','=','usuarios.idRol')
             ->select( 'vendedores.*', 'usuarios.id',
-            'usuarios.cedula','usuarios.nombre','usuarios.apellidoUno','usuarios.apellidoDos','usuarios.correo',
-            'usuarios.contrasena','usuarios.idRol','usuarios.telefono','usuarios.codigoVerificacion','roles.nombre','estados.nombre')
+            'usuarios.cedula',
+            'usuarios.nombre as nombreUsuario',
+            'usuarios.apellidoUno',
+            'usuarios.apellidoDos',
+            'usuarios.correo',
+            'usuarios.contrasena',
+            'usuarios.idRol',
+            'usuarios.telefono',
+            'usuarios.codigoVerificacion',
+            'roles.nombre as nombreRol',
+            'estados.nombre as nombreEstado')
             ->where('usuarios.idRol', '=', '4')
             ->get();
             return response()->json($vendedores);
