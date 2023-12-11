@@ -58,7 +58,7 @@ class ControllerVendedores extends Controller
 
     public function update(Request $request, $id)
     {
-       // try {
+        try {
 
             $usuarioVendedor = Usuario::find($id);
             $vendedor = Vendedor::find($id);
@@ -75,12 +75,12 @@ class ControllerVendedores extends Controller
             $usuarioVendedor->save();
             $vendedor->save();
             return response()->json($usuarioVendedor);
-        //} catch (QueryException $e) {
-           // $errorCode = $e->errorInfo[1];
-           // if ($errorCode == 1452) {
-               // return response()->json(['error' => 'Error de FK: La categoría o estado especificada no existe.'], 400);
-            //}
-       // }
+        } catch (QueryException $e) {
+            $errorCode = $e->errorInfo[1];
+            if ($errorCode == 1452) {
+                return response()->json(['error' => 'Error de FK: La categoría o estado especificada no existe.'], 400);
+            }
+        }
     } //End update
 
     public function exportPDF($id)
