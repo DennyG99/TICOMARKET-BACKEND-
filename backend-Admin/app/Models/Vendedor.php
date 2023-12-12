@@ -16,11 +16,6 @@ class Vendedor extends Model
         return $this->belongsTo(Estado::class, 'idEstado');
     }
 
-    public function rol()
-    {
-        return $this->belongsTo(Rol::class, 'idRol');
-    }
-
     public function usuario(){
         return $this->belongsTo(Usuario::class , 'idVendedor');
     }
