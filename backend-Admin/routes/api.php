@@ -36,9 +36,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::post('login', [ControllerLogin::class, 'login']);
 //Route::post('register', [ControllerLogin::class, 'register']);
-
-
-
+Route::post('/usuario/recuperarContrasena', [ControllerUsuarios::class, 'recuperarContrasena']);
 
 Route::middleware('auth:sanctum')->group(function () {
     Route::get('logout', [ControllerLogin::class, 'logout']);
@@ -51,7 +49,10 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::delete('/estado/eliminar/{id}', [ControllerEstados::class, 'destroy']);
     Route::put('/estado/editar/{id}', [ControllerEstados::class, 'update']);
 
-
+    //Vendedor
+    Route::get('/vendedor/mostrar/{id?}', [ControllerVendedores::class, 'index']);
+    Route::put('/vendedor/modificar/{id}', [ControllerVendedores::class, 'update']);
+    Route::post('/vendedor/eliminar/{id}', [ControllerVendedores::class, 'eliminarVendedor']);
 
     //Administrar Roles
     Route::get('/roles', [ControllerRol::class, 'index']);
@@ -71,11 +72,7 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::patch('/reembolsos/update/{id}', [ControllerReembolsos::class, 'update']);
 
 
-    //Vendedor
-    Route::get('/vendedor/mostrar/{id?}', [ControllerVendedores::class, 'index']);
-    Route::get('/vendedor/pdf/{id}', [ControllerVendedores::class, 'exportPDF']);
-    Route::put('/vendedor/modificar/{id}', [ControllerVendedores::class, 'update']);
-    Route::post('/vendedor/eliminar/{id}', [ControllerVendedores::class, 'eliminarVendedor']);
+
 
 
 
@@ -92,7 +89,6 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::get('/usuario/contarUsuariosPorRol/{idRol}', [ControllerUsuarios::class, 'contarRol']);
     Route::get('/usuario/totalUsuarios', [ControllerUsuarios::class, 'totalUsuarios']);
     Route::get('/usuario/totalUsuariosPorEstado/{idEstado}', [ControllerUsuarios::class, 'totalUsuariosPorEstado']);
-    Route::post('/usuario/recuperarContrasena/{id}', [ControllerUsuarios::class, 'recuperarContrasena']);
     Route::post('/usuario/cambioContrasena/{id}', [ControllerUsuarios::class, 'cambioContrasena']);
 
 
