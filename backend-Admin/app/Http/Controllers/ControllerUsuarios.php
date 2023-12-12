@@ -268,25 +268,18 @@ el total vendedores que usan la Marketplace.*/
     /* Se requiere que en el sistema haya un apartado para poder   	
      Realizar la recuperación de contraseña por medio del correo que el   
      usuario tenga registrado.*/
-    public function recuperarContrasena(Request $request, string $id)
+    public function recuperarContrasena(Request $request)
     {
-        $usuario = Usuario::find($id);
+        $usuario = Usuario::where('correo',$request->correo)->first();;
         $asunto = "Recuperación de Contraseña";
 
-
         if ($usuario) {
-            $nuevaContrasena = Str::random(8);
-
+           $nuevaContrasena = Str::random(8);
             $contenido = "Tu nueva contraseña es: " . $nuevaContrasena;
-
             $usuario->contrasena = Hash::make($nuevaContrasena);
-            //    $usuario->contrasena = ($nuevaContrasena);
-            $usuario->idEstado = 9;
+            $usuario->idEstado = 10;
             $usuario->save();
-
-            Mail::to($usuario->correo)->send(new ControllerMail($asunto, 'Mail.recuperacion', 0, $nuevaContrasena));
-
-
+            Mail::to($request->correo)->send(new ControllerMail($asunto, 'Mail.recuperacion', 0, $nuevaContrasena));
             return response()->json(['message' => 'Contraseña recuperada y enviada al correo'], 200);
         } else {
             return response()->json(['message' => 'Usuario no encontrado'], 404);
